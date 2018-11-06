@@ -18,3 +18,10 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+//User Actions
+
+Route::prefix('users')->group(function () {
+    Route::get('me', 'UsersController@me')->name('users.me');
+    Route::post('uploadPhoto', 'UsersController@uploadPhoto');
+});

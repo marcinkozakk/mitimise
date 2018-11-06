@@ -1,0 +1,19 @@
+// image picker
+#image-picker {
+
+  form {
+    width: 100%;
+    border: 3px dashed rgba(0, 0, 0, 0.125);
+    border-radius: 10px;
+
+    &.dragging {
+      border-color: rgba(3, 169, 244, 0.5);
+    }
+
+    label {
+      text-align: center;
+      width: 100%;
+      padding: 50px 0;
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "Login": "Logowanie",
+  "Register": "Zarejestruj się",
+  "Name": "Nazwa",
+  "E-Mail Address": "Adres email",
+  "Password": "Hasło",
+  "Confirm Password": "Potwierdź hasło",
+  "Remember Me": "Zapamiętaj mnie",
+  "Forgot Your Password?": "Zapomniałeś hasła?",
+  "Reset Password": "Resetuj hasło",
+  "Send Password Reset Link": "Wyślij potwierdzenie adresu e-mail ",
+  "Logout": "Wyloguj"
+}

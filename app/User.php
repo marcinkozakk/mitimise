@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Storage;
 
 class User extends Authenticatable
 {
@@ -27,4 +28,25 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function circles() {
+        return $this->hasMany('App\Circle');
+    }
+
+    public function setPhoto($path)
+    {
+        if(!empty($this->photo)) {
+            Storage::delete('public/' . $this->attributes['photo']);
+        }
+        $this->photo = $path;
+        $this->save();
+
+        return $this->photo;
+    }
+
+    public function getPhotoAttribute($value)
+    {
+        if(empty($value)) return null;
+        return '/storage/' . $value;
+    }
 }
