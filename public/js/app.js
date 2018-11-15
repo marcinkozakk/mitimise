@@ -13879,7 +13879,7 @@ module.exports = Cancel;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(12);
-module.exports = __webpack_require__(40);
+module.exports = __webpack_require__(41);
 
 
 /***/ }),
@@ -13895,10 +13895,27 @@ module.exports = __webpack_require__(40);
 
 __webpack_require__(13);
 __webpack_require__(36);
+__webpack_require__(40);
 
 $('.modal').on('shown.bs.modal', function () {
-  $(this).find('[autofocus]').focus();
+    $(this).find('[autofocus]').focus();
 });
+
+$(document).mouseup(function (e) {
+    var container = $(".popover");
+
+    if (!container.is(e.target) && container.has(e.target).length === 0) {
+        container.popover("hide");
+    }
+});
+
+$(function () {
+    initNewTooltips();
+});
+
+window.initNewTooltips = function () {
+    $('[data-toggle="tooltip"]:not([data-original-title])').tooltip();
+};
 
 /***/ }),
 /* 13 */
@@ -37870,6 +37887,130 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 
 /***/ }),
 /* 40 */
+/***/ (function(module, exports) {
+
+window.rotate = function (circles) {
+    var deg = 360 / circles;
+    $('.avatar-container').each(function (i, elem) {
+        var startDeg = $(elem).css('--endDeg');
+        var endDeg = i * deg;
+
+        $(elem).css({ '--endDeg': endDeg + 'deg' });
+        $(elem).css({ '--startDeg': startDeg });
+
+        $(elem).find('a').css({ '--endDeg': -1 * endDeg + 'deg' });
+        $(elem).find('a').css({ '--startDeg': '-' + startDeg });
+    });
+};
+
+window.searchUser = function () {
+    $result = $('#search-result');
+    $result.empty();
+    $result.append($('<li class="list-group-item text-center">').html('<i class="fas fa-circle-notch fa-2x fa-spin"></i>'));
+    axios({
+        method: 'post',
+        url: '/users/search',
+        data: { s: $('#s').val() }
+    }).then(function (data) {
+        $result.empty();
+        data.data.forEach(function (user) {
+            var disabled = derived.members_id.indexOf(user.id) > -1; //user is member already
+            $result.append($('<li class="list-group-item list-group-item-action p-2">').append($('<div class="row no-gutters">').append($((disabled ? '<span' : '<a') + ' class="col-11" href="#">').html(user.name).on('click', function () {
+                if (!disabled) addMember(user.id, user.name, user.photo);
+            }), $('<a class="col-1" href="#">').append('<img href="#" src="' + user.photo + '">'))).addClass(disabled ? 'list-group-item-success' : ''));
+        });
+    });
+};
+
+jQuery.fn.extend({
+    popMenu: function popMenu() {
+        return $(this).each(function (i, elem) {
+            var user_id = $(elem).data('id');
+            $(elem).popover({
+                container: 'body',
+                placement: 'bottom',
+                html: true,
+                content: derived.getPopContent(user_id)
+            });
+        });
+    }
+});
+
+var addMember = function addMember(id, name, photo) {
+    $('#s').val('');
+    $('#s').focus();
+    $('#search-result').empty();
+    derived.members_id.push(id);
+
+    axios({
+        method: 'post',
+        url: '/memberships/create',
+        data: { user_id: id, circle_id: derived.circle_id }
+    }).then(function (data) {
+        showNewAvatar(id, name, photo);
+    }).catch(function (error) {
+        console.log(error.response);
+        alert('Error!');
+    });
+};
+
+window.deleteMember = function (user_id) {
+    axios({
+        method: 'post',
+        url: '/memberships/delete',
+        data: { user_id: user_id, circle_id: derived.circle_id }
+    }).then(function (data) {
+        console.log(data);
+        var index = derived.members_id.indexOf(user_id);
+        if (index !== -1) derived.members_id.splice(index, 1);
+        deleteAvatar(user_id);
+    }).catch(function (error) {
+        console.log(error.response);
+        alert('Error!');
+    });
+};
+
+var showNewAvatar = function showNewAvatar(id, name, photo) {
+    var len = $('.avatar-container').length;
+    $('<div data-id="' + id + '" class="avatar-container">').append($('<a href="#">').append($('<div data-offset="0, 10%" data-toggle="tooltip" title="' + name + '" class="avatar-wrap w-100">').append($('<img data-id="' + id + '" src="' + photo + '">').popMenu()))).insertAfter('.add-container');
+    rotate(len + 1);
+    $('.avatar-container').each(function (i, elem) {
+        //tricky solution for restart css anim
+        // https://css-tricks.com/restart-css-animation/
+        elem.classList.remove("avatar-container");
+        void elem.offsetWidth;
+        elem.classList.add("avatar-container");
+    });
+    initNewTooltips();
+};
+
+var deleteAvatar = function deleteAvatar(id) {
+    var $avatar = $('.avatar-container[data-id="' + id + '"]');
+    $avatar.find('img').popover('dispose');
+    $avatar.remove();
+    var len = $('.avatar-container').length;
+    rotate(len);
+    $('.avatar-container').each(function (i, elem) {
+
+        //tricky solution for restart css anim
+        // https://css-tricks.com/restart-css-animation/
+        elem.classList.remove("avatar-container");
+        void elem.offsetWidth;
+        elem.classList.add("avatar-container");
+    });
+};
+
+$('#add').popover({
+    placement: 'bottom',
+    html: true,
+    template: '<div class="popover w-100" role="tooltip"><div class="arrow"></div><h3 class="popover-header"></h3><div class="popover-body"></div></div>',
+    content: '' + '<div></div>' + '<div class="input-group mb-1">' + '<input id="s" onkeypress="if(event.which == 13)searchUser()" autofocus class="form-control" placeholder="' + lang.search + '" type="text">' + '<div class="input-group-append">' + '<button onclick="searchUser()" class="btn btn-outline-info"><i class="fas fa-search"></i></button>' + '</div>' + '</div>' + '<ul id="search-result" class="list-group">' + '</ul>'
+});
+
+$('.avatar-wrap').find('img:not(.you)').popMenu();
+
+/***/ }),
+/* 41 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

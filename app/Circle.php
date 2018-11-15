@@ -10,8 +10,12 @@ class Circle extends Model
         'name', 'is_private',
     ];
 
-    public function user()
+    public function owner()
     {
-        return $this->hasOne('App/User');
+        return $this->belongsTo('App\User', 'user_id');
+    }
+
+    public function members() {
+        return $this->belongsToMany('App\User', 'memberships')->orderBy('memberships.created_at', 'desc');
     }
 }

@@ -33,6 +33,12 @@ class User extends Authenticatable
         return $this->hasMany('App\Circle');
     }
 
+    public function memberCircles() {
+        return $this->belongsToMany('App\Circle', 'memberships')
+            ->where('circles.is_private', 0)
+            ->where('circles.user_id', '!=', $this->id);
+    }
+
     public function setPhoto($path)
     {
         if(!empty($this->photo)) {
@@ -46,7 +52,7 @@ class User extends Authenticatable
 
     public function getPhotoAttribute($value)
     {
-        if(empty($value)) return null;
+        if(empty($value)) return '/images/user-default.svg';
         return '/storage/' . $value;
     }
 }

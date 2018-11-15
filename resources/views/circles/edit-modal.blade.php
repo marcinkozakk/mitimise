@@ -1,10 +1,10 @@
-<div class="modal fade" id="add-circle" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="edit-circle" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
-            <form method="post" action="{{ route('circles.create') }}">
+            <form method="post" action="{{ route('circles.update', ['id' => $circle->id]) }}">
                 @csrf
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">{{ __('Create circle') }}</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">{{ __('Edit circle') }}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -16,7 +16,7 @@
                         </label>
 
                         <div class="col-md-6">
-                            <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required autofocus>
+                            <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ $circle->name }}" required autofocus>
 
                             @if ($errors->has('name'))
                                 <span class="invalid-feedback" role="alert">
@@ -33,13 +33,13 @@
                             </legend>
                             <div class="col-md-8">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="is_private" id="private" value="1" checked>
+                                    <input class="form-check-input" type="radio" name="is_private" id="private" value="1" {{ $circle->is_private ? 'checked' : '' }}>
                                     <label class="form-check-label" for="private">
                                         <i data-toggle="tooltip" title="{{ __('Visible only to you') }}"  class="fas fa-lock"></i>
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="is_private" id="public" value="0">
+                                    <input class="form-check-input" type="radio" name="is_private" id="public" value="0" {{ $circle->is_private ? '' : 'checked' }}>
                                     <label class="form-check-label" for="public">
                                         <i data-toggle="tooltip" title="{{ __('Visible to all members') }}" class="fas fa-users"></i>
                                     </label>
@@ -50,7 +50,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('Cancel') }}</button>
-                    <button type="submit" class="btn btn-primary">{{ __('Create') }}</button>
+                    <button type="submit" class="btn btn-primary">{{ __('Edit') }}</button>
                 </div>
             </form>
         </div>

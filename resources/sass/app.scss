@@ -9,6 +9,7 @@
 @import '~bootstrap/scss/bootstrap';
 
 @import "controllers/users";
+@import "controllers/circle";
 
 .navbar-laravel {
   background-color: #fff;
@@ -17,4 +18,12 @@
 
 nav .photo {
   width: 40px;
+}
+
+img {
+  max-width: 100%;
+}
+
+.font-xx-small {
+  font-size: xx-small;
 }

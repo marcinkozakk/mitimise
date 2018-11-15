@@ -10482,6 +10482,120 @@ a.text-dark:focus {
   padding: 50px 0;
 }
 
+@-webkit-keyframes rotate {
+  0% {
+    -webkit-transform: rotate(var(--startDeg));
+            transform: rotate(var(--startDeg));
+  }
+
+  100% {
+    -webkit-transform: rotate(var(--endDeg));
+            transform: rotate(var(--endDeg));
+  }
+}
+
+@keyframes rotate {
+  0% {
+    -webkit-transform: rotate(var(--startDeg));
+            transform: rotate(var(--startDeg));
+  }
+
+  100% {
+    -webkit-transform: rotate(var(--endDeg));
+            transform: rotate(var(--endDeg));
+  }
+}
+
+#circle-container {
+  margin: auto;
+  width: 80vmin;
+  height: 80vmin;
+  position: relative;
+}
+
+#circle-container a {
+  cursor: pointer;
+}
+
+#circle-container .add-container {
+  z-index: 1;
+}
+
+#circle-container .circle-summary {
+  position: absolute;
+  width: 80%;
+  height: 80%;
+  margin: 10%;
+}
+
+#circle-container .avatar-container {
+  --startDeg: 0deg;
+  position: absolute;
+  width: 10%;
+  height: 10%;
+  left: 45%;
+  -webkit-animation-duration: 1s;
+          animation-duration: 1s;
+  -webkit-animation-timing-function: ease-in-out;
+          animation-timing-function: ease-in-out;
+  -webkit-animation-delay: 0s;
+          animation-delay: 0s;
+  -webkit-animation-name: rotate;
+          animation-name: rotate;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+  -webkit-transform-origin: center 450%;
+          transform-origin: center 450%;
+}
+
+#circle-container .avatar-container a {
+  --startDeg: 0deg;
+  position: absolute;
+  width: 100%;
+  -webkit-animation-duration: 1s;
+          animation-duration: 1s;
+  -webkit-animation-timing-function: ease-in-out;
+          animation-timing-function: ease-in-out;
+  -webkit-animation-delay: 0s;
+          animation-delay: 0s;
+  -webkit-animation-name: rotate;
+          animation-name: rotate;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+}
+
+#circle-container .avatar-container a .avatar-wrap img,
+#circle-container .avatar-container a .avatar-wrap i,
+#circle-container .avatar-container a .add-wrap img,
+#circle-container .avatar-container a .add-wrap i {
+  display: block;
+  -webkit-transition: all 0.25s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  transition: all 0.25s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  -webkit-transition-property: margin, max-width;
+  transition-property: margin, max-width;
+  border: 2px solid var(--dark);
+  border-radius: 50%;
+}
+
+#circle-container .avatar-container a .avatar-wrap img:hover,
+#circle-container .avatar-container a .avatar-wrap i:hover,
+#circle-container .avatar-container a .add-wrap img:hover,
+#circle-container .avatar-container a .add-wrap i:hover {
+  margin: -10%;
+  max-width: 120%;
+}
+
+#circle-container .avatar-container #add {
+  font-size: 4.7vw;
+}
+
+.circles-list img {
+  border: 2px solid var(--dark);
+  border-radius: 50%;
+  width: 2em;
+  vertical-align: top;
+}
+
 .navbar-laravel {
   background-color: #fff;
   -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
@@ -10490,5 +10604,13 @@ a.text-dark:focus {
 
 nav .photo {
   width: 40px;
+}
+
+img {
+  max-width: 100%;
+}
+
+.font-xx-small {
+  font-size: xx-small;
 }
 
