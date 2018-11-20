@@ -14,21 +14,24 @@
     @endphp
     <div class="d-flex flex-column align-items-center justify-content-center circle-summary">
         <h1>{{ $circle->name }}</h1>
-        @can('edit', $circle)
-            <div>
+        <div>
+            @can('edit', $circle)
                 @if($circle->is_private)
-                    <i data-toggle="tooltip" title="{{ __('Visible only to you') }}"  class="fas fa-lock"></i>
+                    <i data-toggle="tooltip" title="{{ __('Visible only to you') }}"  class="fas fa-lock m-1"></i>
                 @else
-                    <i data-toggle="tooltip" title="{{ __('Visible to all members') }}" class="fas fa-users"></i>
+                    <i data-toggle="tooltip" title="{{ __('Visible to all members') }}" class="fas fa-users m-1"></i>
                 @endif
                 <a data-toggle="modal" data-target="#edit-circle">
-                    <i data-toggle="tooltip" title="{{ __('Edit') }}" class="fas fa-edit m-2"></i>
+                    <i data-toggle="tooltip" title="{{ __('Edit') }}" class="fas fa-edit m-1"></i>
                 </a>
                 <a data-toggle="modal" data-target="#delete-circle">
-                    <i data-toggle="tooltip" title="{{ __('Delete') }}" class="fas fa-trash"></i>
+                    <i data-toggle="tooltip" title="{{ __('Delete') }}" class="fas fa-trash m-1"></i>
                 </a>
-            </div>
-        @endcan
+            @endcan
+            <a data-toggle="modal" data-target="#add-meeting">
+                <i data-toggle="tooltip" title="{{ __('Create meeting') }}" class="fas fa-handshake m-1"></i>
+            </a>
+        </div>
     </div>
     @can('edit', $circle)
     <div class="avatar-container add-container" style="--endDeg:{{ $deg * $i }}deg">
@@ -43,14 +46,18 @@
         <div data-id="{{ $circle->members[$i - 1]->id }}" class="avatar-container" style="--endDeg:{{ $deg * $i }}deg">
             <a style="--endDeg:-{{ $deg * $i }}deg">
                 <div data-toggle="tooltip" data-offset="0, 10%" title="{{ $circle->members[$i - 1]->name }}" class="avatar-wrap w-100">
-                    <img {{ $circle->members[$i - 1]->id == $circle->owner->id ? 'class=you' : '' }} data-id="{{ $circle->members[$i - 1]->id }}" src="{{ $circle->members[$i - 1]->photo }}">
+                    <img {{ $circle->members[$i - 1]->id == Auth::id() ? 'class=you' : '' }} data-id="{{ $circle->members[$i - 1]->id }}" src="{{ $circle->members[$i - 1]->photo }}">
                 </div>
             </a>
         </div>
     @endwhile
 </div>
-@include('circles.edit-modal')
-@include('circles.delete-modal')
+@can('edit', $circle)
+    @include('circles.edit-modal')
+    @include('circles.delete-modal')
+@endcan
+@include('meetings.add-modal')
+
 @endsection
 
 

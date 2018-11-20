@@ -1,16 +1,16 @@
-<div class="card circles-list mb-2">
-    <div class="card-header">{{ __('Your circles') }}</div>
-    <div class="card-body">
-        @php
+<div class="card-header">{{ __('Your circles') }}</div>
+<div class="list-group list-group-flush">
+    @php
         $circles = $user->circles;
-        @endphp
-        @if($circles->count() == 0)
-            <p>{{ __('You haven\'t created any circle yet, create it now:') }}</p>
-        @else
-            @foreach($circles as $circle)
-                <div class="row p-2">
+    @endphp
+    @if($circles->count() == 0)
+        <p class="list-group-item">{{ __('You haven\'t created any circle yet, create it now:') }}</p>
+    @else
+        @foreach($circles as $circle)
+            <div class="list-group-item">
+                <div class="row">
                     <div class="col-sm-4">
-                        <h4 class="d-flex align-items-center">
+                        <h4 class="d-flex align-items-center mb-0 mt-1">
                             <a href="{{ route('circles.show', [$circle->id]) }}">
                                 {{ $circle->name }}
                             </a>
@@ -30,11 +30,11 @@
                         </a>
                     </div>
                 </div>
-            @endforeach
-        @endif
-        <button type="button" class="btn btn-primary mt-2" data-toggle="modal" data-target="#add-circle">
-            {{ __('Create circle') }}
-        </button>
-    </div>
+            </div>
+        @endforeach
+    @endif
+    <button type="button" class="btn btn-primary m-4" data-toggle="modal" data-target="#add-circle">
+        {{ __('Create circle') }}
+    </button>
 </div>
 @include('circles.add-modal')

@@ -13879,7 +13879,7 @@ module.exports = Cancel;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(12);
-module.exports = __webpack_require__(41);
+module.exports = __webpack_require__(42);
 
 
 /***/ }),
@@ -13896,10 +13896,15 @@ module.exports = __webpack_require__(41);
 __webpack_require__(13);
 __webpack_require__(36);
 __webpack_require__(40);
+__webpack_require__(41);
 
 $('.modal').on('shown.bs.modal', function () {
     $(this).find('[autofocus]').focus();
 });
+
+if ($('.modal .is-invalid').length) {
+    $('.modal').has('.is-invalid').modal('show');
+}
 
 $(document).mouseup(function (e) {
     var container = $(".popover");
@@ -37889,7 +37894,7 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 /* 40 */
 /***/ (function(module, exports) {
 
-window.rotate = function (circles) {
+var rotate = function rotate(circles) {
     var deg = 360 / circles;
     $('.avatar-container').each(function (i, elem) {
         var startDeg = $(elem).css('--endDeg');
@@ -37903,7 +37908,7 @@ window.rotate = function (circles) {
     });
 };
 
-window.searchUser = function () {
+window.searchUserForCircle = function () {
     $result = $('#search-result');
     $result.empty();
     $result.append($('<li class="list-group-item text-center">').html('<i class="fas fa-circle-notch fa-2x fa-spin"></i>'));
@@ -38004,13 +38009,50 @@ $('#add').popover({
     placement: 'bottom',
     html: true,
     template: '<div class="popover w-100" role="tooltip"><div class="arrow"></div><h3 class="popover-header"></h3><div class="popover-body"></div></div>',
-    content: '' + '<div></div>' + '<div class="input-group mb-1">' + '<input id="s" onkeypress="if(event.which == 13)searchUser()" autofocus class="form-control" placeholder="' + lang.search + '" type="text">' + '<div class="input-group-append">' + '<button onclick="searchUser()" class="btn btn-outline-info"><i class="fas fa-search"></i></button>' + '</div>' + '</div>' + '<ul id="search-result" class="list-group">' + '</ul>'
+    content: '' + '<div></div>' + '<div class="input-group mb-1">' + '<input id="s" onkeypress="if(event.which == 13)searchUserForCircle()" autofocus class="form-control" placeholder="' + lang.search + '" type="text">' + '<div class="input-group-append">' + '<button onclick="searchUserForCircle()" class="btn btn-outline-info"><i class="fas fa-search"></i></button>' + '</div>' + '</div>' + '<ul id="search-result" class="list-group">' + '</ul>'
 });
 
 $('.avatar-wrap').find('img:not(.you)').popMenu();
 
 /***/ }),
 /* 41 */
+/***/ (function(module, exports) {
+
+window.searchUserForMeeting = function () {
+    $result = $('#search-result');
+    $result.empty();
+    $result.append($('<li class="list-group-item text-center">').html('<i class="fas fa-circle-notch fa-2x fa-spin"></i>'));
+    axios({
+        method: 'post',
+        url: '/users/search',
+        data: { s: $('#s').val() }
+    }).then(function (data) {
+        $result.empty();
+        data.data.forEach(function (user) {
+            var disabled = derived.guests_id.indexOf(user.id) > -1; //user is member already
+            $result.append($('<li class="list-group-item list-group-item-action p-2">').append($('<div class="row no-gutters">').append($((disabled ? '<span' : '<a') + ' class="col-11" href="#">').html(user.name).on('click', function () {
+                if (!disabled) addGuest(user.id, user.name, user.photo);
+            }), $('<a class="col-1" href="#">').append('<img href="#" src="' + user.photo + '">'))).addClass(disabled ? 'list-group-item-success' : ''));
+        });
+    });
+};
+
+var addGuest = function addGuest(id, name, photo) {
+    $('#s').val('');
+    $('#s').focus();
+    $('#search-result').empty();
+    derived.guests_id.push(id);
+    $('.guest-count').html(derived.guests_id.length);
+
+    $('.guest-list').append($('<img data-toggle="tooltip" title="' + name + '" src="' + photo + '" >'));
+    $('#invite-form').append($('<input type="hidden" name="users_id[]" value="' + id + '">'));
+    initNewTooltips();
+};
+
+$('#locked-modal').modal();
+
+/***/ }),
+/* 42 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

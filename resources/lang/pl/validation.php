@@ -12,13 +12,13 @@ return [
     */
     'accepted'             => ':attribute musi zostać zaakceptowany.',
     'active_url'           => ':attribute jest nieprawidłowym adresem URL.',
-    'after'                => ':attribute musi być datą późniejszą od :date.',
+    'after'                => ':attribute musi być później niż :date.',
     'after_or_equal'       => ':attribute musi być datą nie wcześniejszą niż :date.',
     'alpha'                => ':attribute może zawierać jedynie litery.',
     'alpha_dash'           => ':attribute może zawierać jedynie litery, cyfry i myślniki.',
     'alpha_num'            => ':attribute może zawierać jedynie litery i cyfry.',
     'array'                => ':attribute musi być tablicą.',
-    'before'               => ':attribute musi być datą wcześniejszą od :date.',
+    'before'               => ':attribute musi być wcześniej niż :date.',
     'before_or_equal'      => ':attribute musi być datą nie późniejszą niż :date.',
     'between'              => [
         'numeric' => ':attribute musi zawierać się w granicach :min - :max.',
@@ -82,7 +82,7 @@ return [
     'min'                  => [
         'numeric' => ':attribute musi być nie mniejszy od :min.',
         'file'    => ':attribute musi mieć przynajmniej :min kilobajtów.',
-        'string'  => 'Musi mieć przynajmniej :min znaków.',
+        'string'  => ':attribute usi mieć przynajmniej :min znaków.',
         'array'   => ':attribute musi mieć przynajmniej :min elementów.',
     ],
     'not_in'               => 'Zaznaczony :attribute jest nieprawidłowy.',
@@ -90,7 +90,7 @@ return [
     'numeric'              => ':attribute musi być liczbą.',
     'present'              => 'Pole :attribute musi być obecne.',
     'regex'                => 'Format :attribute jest nieprawidłowy.',
-    'required'             => 'Pole :attribute jest wymagane.',
+    'required'             => 'Pole jest wymagane.',
     'required_if'          => 'Pole :attribute jest wymagane gdy :other jest :value.',
     'required_unless'      => ':attribute jest wymagany jeżeli :other nie znajduje się w :values.',
     'required_with'        => 'Pole :attribute jest wymagane gdy :values jest obecny.',
@@ -135,5 +135,9 @@ return [
     |
     */
     'attributes' => [
+        'name_meeting' => 'nazwa',
+        'password' => 'hasło',
+        'starts_at' => 'Rozpoczęcie',
+        'ends_at' => 'Zakończenie'
     ],
 ];

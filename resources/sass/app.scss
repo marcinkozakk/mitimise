@@ -10,6 +10,7 @@
 
 @import "controllers/users";
 @import "controllers/circle";
+@import "controllers/meeting";
 
 .navbar-laravel {
   background-color: #fff;
@@ -26,4 +27,13 @@ img {
 
 .font-xx-small {
   font-size: xx-small;
+}
+
+.avatar-border {
+  border: 2px solid var(--dark);
+  border-radius: 50%;
+}
+
+a {
+  cursor: pointer;
 }

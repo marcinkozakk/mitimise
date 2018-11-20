@@ -8,10 +8,15 @@
 require('./bootstrap');
 require('./userPhoto');
 require('./showCircle');
+require('./showMeeting');
 
 $('.modal').on('shown.bs.modal', function() {
     $(this).find('[autofocus]').focus();
 });
+
+if($('.modal .is-invalid').length) {
+    $('.modal').has('.is-invalid').modal('show');
+}
 
 $(document).mouseup(function (e) {
     var container = $(".popover");

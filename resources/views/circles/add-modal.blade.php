@@ -16,11 +16,11 @@
                         </label>
 
                         <div class="col-md-6">
-                            <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required autofocus>
+                            <input id="name" type="text" class="form-control{{ $errors->has('name_circle') ? ' is-invalid' : '' }}" name="name_circle" value="{{ old('name_circle') }}" required autofocus>
 
-                            @if ($errors->has('name'))
+                            @if ($errors->has('name_circle'))
                                 <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $errors->first('name') }}</strong>
+                                    <strong>{{ $errors->first('name_circle') }}</strong>
                                 </span>
                             @endif
                         </div>
