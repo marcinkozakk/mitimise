@@ -46,3 +46,6 @@ var addGuest = (id, name, photo) => {
 };
 
 $('#locked-modal').modal();
+$('a[data-target="#delete-comment"]').on('click', (e) => {
+    $('input[name="comment_id"]').val($(e.currentTarget).data('comment-id'));
+});

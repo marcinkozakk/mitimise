@@ -27,7 +27,7 @@
     line-height: 7rem;
     border-radius: 50%;
     display: inline-block;
-    border: 2px solid black;
+    border: 2px solid $dark;
 
     &.green {
       background-color: #4caf50a6;
@@ -40,7 +40,7 @@
 
   .btn-going {
     background-color: #4caf50a6;
-    border-color: #000;
+    border-color: $dark;
     color: #000;
     white-space: normal;
 
@@ -51,7 +51,7 @@
 
   .btn-cant {
     background-color: #f6993fa6;
-    border-color: #000;
+    border-color: $dark;
     color: #000;
     white-space: normal;
 
@@ -62,7 +62,7 @@
 
   .btn-undecided {
     background-color: #9e9e9ea6;
-    border-color: #000;
+    border-color: $dark;
     color: #000;
     white-space: normal;
 
@@ -76,4 +76,39 @@
   position: absolute;
   width: 100%;
   height: 100%;
+}
+
+.comments {
+  form.going {
+    text-align: right;
+  }
+
+  .row {
+    &.going {
+
+      textarea {
+        background-color: #c1e3c3;
+        border-color: $dark;
+      }
+
+      .comment-content {
+        background-color: #4caf50a6;
+      }
+    }
+
+    &.undecided {
+      text-align: right;
+      flex-direction: row-reverse;
+
+      textarea {
+        background-color: #dbdbdb;
+        border-color: $dark;
+      }
+
+      .comment-content {
+        background-color: #bebebf;
+      }
+    }
+  }
+
 }
