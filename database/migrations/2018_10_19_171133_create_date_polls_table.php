@@ -16,7 +16,7 @@ class CreateDatePollsTable extends Migration
         Schema::create('date_polls', function (Blueprint $table) {
             $table->increments('id');
             $table->date('date');
-            $table->enum('availability', ['yes', 'no'])->default('yes');
+            $table->enum('availability', ['yes', 'no'])->default('yes')->nullable();
             $table->unsignedInteger('invitation_id');
 
             $table->foreign('invitation_id', 'date_poll_refers_invitation')->references('id')->on('invitations');

@@ -50,6 +50,7 @@ Route::prefix('meetings')->group(function () {
     Route::get('show/{id}', 'MeetingsController@show')->name('meetings.show');
     Route::post('create', 'MeetingsController@create')->name('meetings.create');
     Route::post('update/{id}', 'MeetingsController@update')->name('meetings.update');
+    Route::post('setDate/{id}', 'MeetingsController@setDate')->name('meetings.setDate');
     Route::get('cancel/{id}', 'MeetingsController@cancel')->name('meetings.cancel');
     Route::post('revertCancelation/{id}', 'MeetingsController@revertCancelation')->name('meetings.revert');
 });
@@ -62,7 +63,16 @@ Route::prefix('invitations')->group(function () {
     Route::get('setState/{meeting_id}/{state}', 'InvitationsController@setState')->name('invitations.setState');
 });
 
+//Comments Actions
+
 Route::prefix('comments')->group(function() {
     Route::post('create/{meeting_id}', 'CommentsController@create')->name('comments.create');
     Route::post('delete', 'CommentsController@delete')->name('comments.delete');
+});
+
+//Date Polls Actions
+
+Route::prefix('datePolls')->group(function() {
+    Route::post('setAvailability/{meeting_id}', 'DatePollsController@setAvailability')->name('datePolls.setAvailability');
+    Route::post('delete', 'DatePollsController@delete')->name('datePolls.delete');
 });

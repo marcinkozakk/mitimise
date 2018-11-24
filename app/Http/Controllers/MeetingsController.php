@@ -20,7 +20,7 @@ class MeetingsController extends Controller
     {
         $request->validate([
             'name_meeting' => 'required|max:255',
-            'starts_at' => 'nullable|date',
+            'starts_at' => 'nullable|date|after:now',
             'ends_at' => 'nullable|date|after:starts_at',
         ]);
 
@@ -65,7 +65,7 @@ class MeetingsController extends Controller
     {
         $request->validate([
             'name' => 'required|max:255',
-            'starts_at' => 'nullable|date',
+            'starts_at' => 'nullable|date|after:now',
             'ends_at' => 'nullable|date|after:starts_at',
         ]);
 
@@ -81,6 +81,30 @@ class MeetingsController extends Controller
             $meeting->starts_at = $request->starts_at;
             $meeting->ends_at = $request->ends_at;
         }
+
+        if($meeting->save()) {
+            Session::flash('alert-success', __('Meeting has been updated'));
+            return redirect()->route('meetings.show', ['id' => $meeting->id]);
+        }
+
+        Session::flash('alert-danger', __('Unable to update meeting'));
+        return redirect()->route('meetings.show', ['id' => $meeting->id]);
+    }
+
+    public function setDate(Request $request, $id)
+    {
+        $meeting = Meeting::findOrFail($id);
+
+        $this->authorize('edit', $meeting);
+
+        $request->merge(['starts_at_merged' => $request->date_starts_at . 'T' . $request->time_starts_at]);
+        $request->validate([
+            'starts_at_merged' => 'nullable|date|after:now',
+            'ends_at' => 'nullable|date|after:starts_at',
+        ]);
+
+        $meeting->starts_at = $request->starts_at_merged;
+        $meeting->ends_at = $request->ends_at;
 
         if($meeting->save()) {
             Session::flash('alert-success', __('Meeting has been updated'));

@@ -2,8 +2,6 @@
 
 @php
 $groupedGuests = $meeting->guests->groupBy('pivot.state');
-
-//TODO: odwrócenie anulowania
 @endphp
 
 @section('content')
@@ -18,6 +16,8 @@ $groupedGuests = $meeting->guests->groupBy('pivot.state');
             @endcan
         @endcan
 
+        @include('meetings.partials.datePoll')
+
         @include('meetings.partials.comments')
 
     </div>
@@ -26,15 +26,18 @@ $groupedGuests = $meeting->guests->groupBy('pivot.state');
         @include('meetings.revert-modal')
     @endcan
 
+
     @can('comment', $meeting)
         @include('meetings.cant-modal')
-        @include('meetings.delete-comment-modal')
+        @include('meetings.deleteComment-modal')
     @endcan
 
     @can('edit', $meeting)
         @include('meetings.invite-modal')
         @include('meetings.edit-modal')
         @include('meetings.cancel-modal')
+        @include('meetings.deleteDay-modal')
+        @include('meetings.setDate-modal')
     @endcan
 @endsection
 

@@ -137,6 +137,26 @@ namespace App{
 
 namespace App{
 /**
+ * App\DatePoll
+ *
+ * @property int $id
+ * @property string $date
+ * @property string $availability
+ * @property int $user_id
+ * @property int $meeting_id
+ * @property-read \App\Circle $circle
+ * @property-read \App\User $user
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\DatePoll whereAvailability($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\DatePoll whereDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\DatePoll whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\DatePoll whereMeetingId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\DatePoll whereUserId($value)
+ */
+	class DatePoll extends \Eloquent {}
+}
+
+namespace App{
+/**
  * App\Invitation
  *
  * @property int $id

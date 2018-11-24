@@ -2,7 +2,7 @@
     $class = $groupedGuests['going']->contains('id', Auth::id()) ? 'going' : 'undecided';
 @endphp
 
-<div id="comments" class="comments mt-3">
+<div id="comments" class="comments container-fluid mt-3">
     <div class="row">
         <h2>
             {{ __('Comments') }}
@@ -15,10 +15,10 @@
                 <img class="avatar-border" src="{{ Auth::user()->photo }}">
             </div>
             <div class="col-5">
-                    <textarea name="comment_content" rows="3" class="form-control" placeholder="{{ __('write comment...') }}"></textarea>
-                    <button class="btn btn-{{ $class }} mt-1" type="submit">
-                        {{ __('Submit') }}
-                    </button>
+                <textarea name="comment_content" rows="3" class="form-control" placeholder="{{ __('write comment...') }}"></textarea>
+                <button class="btn btn-{{ $class }} mt-1" type="submit">
+                    {{ __('Submit') }}
+                </button>
             </div>
         </form>
     @endcan

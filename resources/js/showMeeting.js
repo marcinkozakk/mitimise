@@ -46,6 +46,16 @@ var addGuest = (id, name, photo) => {
 };
 
 $('#locked-modal').modal();
+
 $('a[data-target="#delete-comment"]').on('click', (e) => {
     $('input[name="comment_id"]').val($(e.currentTarget).data('comment-id'));
+});
+$('a[data-target="#delete-day"]').on('click', (e) => {
+    $('input[name="date"]').val($(e.currentTarget).data('date'));
+});
+$('a[data-target="#setDate-meeting"]').on('click', (e) => {
+    var date = $(e.currentTarget).data('date');
+    $('input[name="date_starts_at"]').val(date);
+    $('input[name="ends_at"]').val(date + 'T23:00');
+    $('#date_starts_at').html(new Date(date).toLocaleDateString());
 });
