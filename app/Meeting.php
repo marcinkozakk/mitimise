@@ -22,6 +22,11 @@ class Meeting extends Model
         return $this->hasMany('App\Comment')->orderBy('created_at', 'desc');
     }
 
+    public function place()
+    {
+        return $this->belongsTo('App\Place');
+    }
+
     public function getDatePollsAttribute()
     {
         $dates = DatePoll::where('meeting_id', $this->id)

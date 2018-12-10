@@ -22,6 +22,7 @@
         "vue": "^2.5.7"
     },
     "dependencies": {
-        "croppie": "^2.6.2"
+        "croppie": "^2.6.2",
+        "google-maps": "^3.3.0"
     }
 }

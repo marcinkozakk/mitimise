@@ -26,6 +26,7 @@ namespace App{
  * @property int $organizer_id
  * @property int|null $place_id
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Comment[] $comments
+ * @property-read mixed $date_polls
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\User[] $guests
  * @property-read \App\User $organizer
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Meeting whereCreatedAt($value)
@@ -41,6 +42,30 @@ namespace App{
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Meeting whereUpdatedAt($value)
  */
 	class Meeting extends \Eloquent {}
+}
+
+namespace App{
+/**
+ * App\Place
+ *
+ * @property int $id
+ * @property string $name
+ * @property string $address
+ * @property float|null $lat
+ * @property float|null $lng
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property int $is_private
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Place whereAddress($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Place whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Place whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Place whereIsPrivate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Place whereLat($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Place whereLng($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Place whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Place whereUpdatedAt($value)
+ */
+	class Place extends \Eloquent {}
 }
 
 namespace App{
@@ -141,15 +166,19 @@ namespace App{
  *
  * @property int $id
  * @property string $date
- * @property string $availability
+ * @property string|null $availability
  * @property int $user_id
  * @property int $meeting_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Circle $circle
  * @property-read \App\User $user
  * @method static \Illuminate\Database\Eloquent\Builder|\App\DatePoll whereAvailability($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\DatePoll whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\DatePoll whereDate($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\DatePoll whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\DatePoll whereMeetingId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\DatePoll whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\DatePoll whereUserId($value)
  */
 	class DatePoll extends \Eloquent {}

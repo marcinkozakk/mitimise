@@ -42,5 +42,17 @@
                 @endif
             </dd>
         </dl>
+        @if($meeting->place)
+            <dl class="col-6">
+                <dt><strong>{{ __('Place') }}</strong></dt>
+                <dd>
+                    <button class="btn btn-link text-left p-0" data-toggle="modal" data-target="#map-modal">
+                        {{ $meeting->place->name }}
+                        <br>
+                        {{ $meeting->place->address }}
+                    </button>
+                </dd>
+            </dl>
+        @endif
     </div>
 </div>

@@ -17,8 +17,8 @@ class CreatePlacesTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('address');
-            $table->decimal('lat', 10, 7);
-            $table->decimal('lng', 11, 7);
+            $table->decimal('lat', 10, 7)->nullable();
+            $table->decimal('lng', 11, 7)->nullable();
             $table->timestamps();
             $table->boolean('is_private');
         });

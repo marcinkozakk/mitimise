@@ -34,4 +34,3 @@
         @endforeach
     @endif
 </div>
-@include('meetings.add-modal')

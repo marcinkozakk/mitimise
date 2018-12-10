@@ -53,6 +53,7 @@
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 @endif
                             </li>
+                            <li class="nav-item dropdown">
                         @else
                             <li class="nav-item">
                                 <a href="{{ route('users.me') }}" class="nav-link">
@@ -80,7 +81,21 @@
                                     </form>
                                 </div>
                             </li>
+                            <li class="nav-item dropdown p-2">
                         @endguest
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+                                {{ Config::get('app.availableLanguages')[App::getLocale()] }}
+                            </a>
+                            <ul class="dropdown-menu">
+                                @foreach (Config::get('app.availableLanguages') as $lang => $language)
+                                    @if ($lang != App::getLocale())
+                                        <li>
+                                            <a class="dropdown-item" href="{{ route('lang.set', $lang) }}">{{$language}}</a>
+                                        </li>
+                                    @endif
+                                @endforeach
+                            </ul>
+                        </li>
                     </ul>
                 </div>
             </div>
