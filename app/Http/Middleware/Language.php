@@ -20,6 +20,7 @@ class Language
                 if(array_key_exists($lang, Config::get('app.availableLanguages'))) {
                     App::setLocale($lang);
                     session()->put('locale', $lang);
+                    break;
                 }
             }
             App::setLocale(Config::get('app.fallback_locale'));

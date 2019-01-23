@@ -25,8 +25,8 @@ class MeetingsController extends Controller
             'ends_at' => 'nullable|date|after:starts_at',
             'place_name' => 'max:255',
             'place_address' => 'max:255',
-            'place_lat' => 'numeric|between:-90,90',
-            'place_lng' => 'numeric|between:-180,180'
+            'place_lat' => 'nullable|numeric|between:-90,90',
+            'place_lng' => 'nullable|numeric|between:-180,180'
         ]);
 
         $meeting = new Meeting;
@@ -87,8 +87,8 @@ class MeetingsController extends Controller
             'ends_at' => 'nullable|date|after:starts_at',
             'place_name' => 'max:255',
             'place_address' => 'max:255',
-            'place_lat' => 'numeric|between:-90,90',
-            'place_lng' => 'numeric|between:-180,180'
+            'place_lat' => 'nullable|numeric|between:-90,90',
+            'place_lng' => 'nullable|numeric|between:-180,180'
         ]);
 
         $meeting = Meeting::findOrFail($id);
