@@ -6,17 +6,26 @@
  */
 
 require('./bootstrap');
+require('./userPhoto');
+require('./showCircle');
 
-window.Vue = require('vue');
-
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
-
-Vue.component('example-component', require('./components/ExampleComponent.vue'));
-
-const app = new Vue({
-    el: '#app'
+$('.modal').on('shown.bs.modal', function() {
+    $(this).find('[autofocus]').focus();
 });
+
+$(document).mouseup(function (e) {
+    var container = $(".popover");
+
+    if (!container.is(e.target)
+        && container.has(e.target).length === 0) {
+        container.popover("hide");
+    }
+});
+
+$(function () {
+    initNewTooltips();
+});
+
+window.initNewTooltips = () => {
+    $('[data-toggle="tooltip"]:not([data-original-title])').tooltip();
+};

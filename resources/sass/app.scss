@@ -8,7 +8,22 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
+@import "controllers/users";
+@import "controllers/circle";
+
 .navbar-laravel {
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+nav .photo {
+  width: 40px;
+}
+
+img {
+  max-width: 100%;
+}
+
+.font-xx-small {
+  font-size: xx-small;
 }

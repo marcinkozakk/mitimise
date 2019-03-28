@@ -1,0 +1,86 @@
+@keyframes rotate {
+  0% {
+    transform: rotate(var(--startDeg))
+  }
+
+  100% {
+    transform: rotate(var(--endDeg));
+  }
+}
+
+#circle-container {
+  margin: auto;
+  width: 80vmin;
+  height: 80vmin;
+  position: relative;
+
+  a {
+    cursor: pointer;
+  }
+
+  .add-container {
+    z-index: 1;
+  }
+
+  .circle-summary {
+    position: absolute;
+    width: 80%;
+    height: 80%;
+    margin: 10%;
+  }
+
+  .avatar-container {
+    --startDeg: 0deg;
+    position: absolute;
+    width: 10%;
+    height: 10%;
+    left: 45%;
+    animation-duration: 1s;
+    animation-timing-function: ease-in-out;
+    animation-delay: 0s;
+    animation-name: rotate;
+    animation-fill-mode: forwards;
+    transform-origin: center 450%;
+
+
+    a {
+      --startDeg: 0deg;
+      position: absolute;
+      width: 100%;
+      animation-duration: 1s;
+      animation-timing-function: ease-in-out;
+      animation-delay: 0s;
+      animation-name: rotate;
+      animation-fill-mode: forwards;
+
+      .avatar-wrap, .add-wrap {
+        img, i {
+          display: block;
+          transition: all 0.25s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+          transition-property: margin, max-width;
+          border: 2px solid var(--dark);
+          border-radius: 50%;
+
+          &:hover {
+            margin: -10%;
+            max-width: 120%;
+          }
+        }
+      }
+    }
+
+    #add {
+      font-size: 4.7vw;
+    }
+  }
+}
+
+.circles-list {
+  img {
+    border: 2px solid var(--dark);
+    border-radius: 50%;
+    width: 2em;
+    vertical-align: top;
+  }
+
+}
