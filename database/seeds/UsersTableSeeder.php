@@ -12,12 +12,12 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         $firstNames = [
-            'Jan', 'Stanisław', 'Andrzej', 'Józef', 'Tadeusz', 'Jerzy', 'Zbigniew', 'Krzysztof', 'Henryk', 'Ryszard', 'Kazimierz', 'Marek', 'Marian', 'Piotr', 'Janusz', 'Władysław', 'Adam', 'Wiesław', 'Zdzisław', 'Edward', 'Mieczysław', 'Roman', 'Mirosław', 'Grzegorz', 'Czesław', 'Dariusz', 'Wojciech', 'Jacek', 'Eugeniusz', 'Tomasz', 'Stefan', 'Zygmunt', 'Leszek',
-            'Maria', 'Krystyna', 'Anna', 'Barbara', 'Teresa', 'Elżbieta', 'Janina', 'Zofia', 'Jadwiga', 'Danuta', 'Halina', 'Irena', 'Ewa', 'Małgorzata', 'Helena', 'Grażyna', 'Bożena', 'Stanisława', 'Jolanta', 'Marianna', 'Urszula', 'Wanda', 'Alicja', 'Dorota', 'Agnieszka', 'Beata', 'Katarzyna', 'Joanna', 'Wiesława', 'Renata', 'Iwona', 'Genowefa'
+            'Jan', 'Andrzej', 'Tadeusz', 'Jerzy', 'Zbigniew', 'Krzysztof', 'Henryk', 'Ryszard', 'Kazimierz', 'Marek', 'Marian', 'Piotr', 'Janusz', 'Adam', 'Edward', 'Roman', 'Grzegorz', 'Dariusz', 'Wojciech', 'Jacek', 'Eugeniusz', 'Tomasz', 'Stefan', 'Zygmunt', 'Leszek', 'Bartosz', 'Grzegorz', 'Czarek', 'Damian', 'Filip', 'Norbert', 'Olek', 'Cezary', 'Cyryl',
+            'Maria', 'Krystyna', 'Anna', 'Barbara', 'Teresa', 'Janina', 'Zofia', 'Jadwiga', 'Danuta', 'Halina', 'Irena', 'Ewa', 'Helena', 'Jolanta', 'Marianna', 'Urszula', 'Wanda', 'Alicja', 'Dorota', 'Agnieszka', 'Beata', 'Katarzyna', 'Joanna', 'Renata', 'Iwona', 'Genowefa'
         ];
 
         $lastName = [
-            'Nowak', 'Kowalczyk', 'Woźniak', 'Krawczyk', 'Zając', 'Król', 'Wieczorek', 'Wróbel', 'Duda', 'Pawlak', 'Walczak', 'Adamczyk'
+            'Nowak', 'Kowalczyk', 'Krawczyk', 'Wieczorek', 'Duda', 'Pawlak', 'Walczak', 'Adamczyk'
         ];
 
         $name = $firstNames[random_int(0,count($firstNames)-1)] . ' ' . $lastName[random_int(0,count($lastName)-1)];

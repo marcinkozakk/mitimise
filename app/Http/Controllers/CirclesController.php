@@ -40,7 +40,7 @@ class CirclesController extends Controller
         $circle = new Circle;
 
         $circle->name = $request->name;
-        $circle->is_private = $request->is_private;
+        $circle->is_private = $request->is_private ?? true;
         $circle->user_id = \Auth::id();
 
         if($circle->save()) {
@@ -79,7 +79,7 @@ class CirclesController extends Controller
         $this->authorize('edit', $circle);
 
         $circle->name = $request->name;
-        $circle->is_private = $request->is_private;
+        $circle->is_private = $request->is_private ?? true;
 
         if($circle->save()) {
             Session::flash('alert-success', __('Circle has been updated'));
