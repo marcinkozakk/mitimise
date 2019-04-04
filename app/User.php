@@ -33,6 +33,16 @@ class User extends Authenticatable implements MustVerifyEmail
         'password', 'remember_token',
     ];
 
+    public function circles() {
+        return $this->hasMany('App\Circle');
+    }
+
+    public function memberCircles() {
+        return $this->belongsToMany('App\Circle', 'memberships')
+            ->where('circles.is_private', 0)
+            ->where('circles.user_id', '!=', $this->id);
+    }
+
     /**
      * Delete user photo if exist, them save new photo path
      *

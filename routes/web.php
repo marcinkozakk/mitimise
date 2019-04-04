@@ -27,3 +27,19 @@ Route::prefix('users')->group(function () {
     Route::post('uploadPhoto', 'UsersController@uploadPhoto');
     Route::post('search', 'UsersController@search');
 });
+
+//Circles Actions
+
+Route::prefix('circles')->group(function () {
+    Route::post('create', 'CirclesController@create')->name('circles.create');
+    Route::post('update/{id}', 'CirclesController@update')->name('circles.update');
+    Route::post('delete/{id}', 'CirclesController@delete')->name('circles.delete');
+    Route::get('show/{id}', 'CirclesController@show')->name('circles.show');
+});
+
+//Memberships Actions
+
+Route::prefix('memberships')->group(function () {
+    Route::post('create', 'MembershipsController@create')->name('memberships.create');
+    Route::post('delete', 'MembershipsController@delete')->name('memberships.delete');
+});

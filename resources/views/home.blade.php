@@ -7,6 +7,8 @@
             <div class="jumbotron">
                 <h1 class="display-4">{{ __('Hello') }}, {{ Auth::user()->name }}!</h1>
             </div>
+            @include('homeElements.circle')
+            @include('homeElements.memberCircle')
         </div>
     </div>
 </div>
