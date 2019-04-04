@@ -8,10 +8,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 /**
+ * This controller is responsible for handling user actions requests
+ *
  * Class UsersController
  * @package App\Http\Controllers
- *
- * This controller is responsible for handling user actions requests
  */
 class UsersController extends Controller
 {

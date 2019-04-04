@@ -8,13 +8,29 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
+/**
+ * This controller is responsible for handling circles actions requests
+ *
+ * Class CirclesController
+ * @package App\Http\Controllers
+ */
 class CirclesController extends Controller
 {
+    /**
+     * CirclesController constructor.
+     */
     public function __construct()
     {
         $this->middleware('auth');
     }
 
+    /**
+     * Create new circle and first member - creator
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
+     */
     public function create(Request $request)
     {
         $request->validate([
@@ -44,7 +60,14 @@ class CirclesController extends Controller
         return back()->withInput();
     }
 
-
+    /**
+     * Update specific circle
+     *
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
     public function update(Request $request, $id)
     {
         $request->validate([
@@ -67,6 +90,13 @@ class CirclesController extends Controller
         return redirect()->route('circles.show', ['id' => $circle->id]);
     }
 
+    /**
+     * Show the circle view
+     *
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
     public function show($id) {
         $circle = Circle::findOrFail($id);
 
@@ -75,6 +105,13 @@ class CirclesController extends Controller
         return view('circles.show', ['circle' => $circle]);
     }
 
+    /**
+     * Delete specific circe and all members
+     *
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
     public function delete($id)
     {
         $circle = Circle::find($id);

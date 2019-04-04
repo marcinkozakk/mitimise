@@ -13,7 +13,7 @@ Mitimise is a web application that simplifies organising meetings.
 
 ## Installation
 
-###Windows users:
+### Windows users:
 
 1. Download [wamp](http://www.wampserver.com/en/)
 2. Download and extract [cmder mini](https://github.com/cmderdev/cmder/releases/download/v1.1.4.1/cmder_mini.zip)
@@ -32,7 +32,7 @@ cmder will be refered as console
 7. Run `php artisan key:generate`
 8. Run `php artisan migrate`
 9. Run `php artisan serve`
-#####You can now access your project at localhost:8000 :)
+##### You can now access your project at localhost:8000 :)
 
 ## Docs
-See `/docs` folder
+See `/docs` folder or [GitHub page](https://marcinkozakk.github.io/mitimise/)

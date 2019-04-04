@@ -8,8 +8,10 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Storage;
 
 /**
- * App\User
+ * User model
  *
+ * Class User
+ * @package App
  */
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -33,10 +35,20 @@ class User extends Authenticatable implements MustVerifyEmail
         'password', 'remember_token',
     ];
 
+    /**
+     * Return circles that user is a creator of
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function circles() {
         return $this->hasMany('App\Circle');
     }
 
+    /**
+     * Return circles that user is a member of
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function memberCircles() {
         return $this->belongsToMany('App\Circle', 'memberships')
             ->where('circles.is_private', 0)

@@ -6,15 +6,35 @@ use App\Circle;
 use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
+/**
+ * This policy is responsible for organizing authorization logic around circles actions
+ *
+ * Class CirclesPolicy
+ * @package App\Policies
+ */
 class CirclesPolicy
 {
     use HandlesAuthorization;
 
+    /**
+     * Check if user is authorized to show circle
+     *
+     * @param User $user
+     * @param Circle $circle
+     * @return bool
+     */
     public function show(User $user, Circle $circle)
     {
         return $user->id === $circle->user_id || (!$circle->is_private && $circle->members->contains('id', $user->id));
     }
 
+    /**
+     * Check if user is authorized to edit circle
+     *
+     * @param User $user
+     * @param Circle $circle
+     * @return bool
+     */
     public function edit(User $user, Circle $circle)
     {
         return $user->id === $circle->user_id;
