@@ -28,4 +28,3 @@
         @endif
     </div>
 </div>
-@include('circles.add-modal')

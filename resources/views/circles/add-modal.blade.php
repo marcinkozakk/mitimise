@@ -50,7 +50,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('Cancel') }}</button>
-                    <button type="submit" class="btn btn-primary">{{ __('Create') }}</button>
+                    <button type="submit" class="btn btn-primary" name="create-circle">{{ __('Create') }}</button>
                 </div>
             </form>
         </div>
