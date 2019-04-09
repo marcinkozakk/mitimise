@@ -43,3 +43,20 @@ Route::prefix('memberships')->group(function () {
     Route::post('create', 'MembershipsController@create')->name('memberships.create');
     Route::post('delete', 'MembershipsController@delete')->name('memberships.delete');
 });
+
+//Meetings Actions
+
+Route::prefix('meetings')->group(function () {
+    Route::get('show/{id}', 'MeetingsController@show')->name('meetings.show');
+    Route::post('create', 'MeetingsController@create')->name('meetings.create');
+    Route::post('update/{id}', 'MeetingsController@update')->name('meetings.update');
+    Route::get('cancel/{id}', 'MeetingsController@cancel')->name('meetings.cancel');
+});
+
+//Invitations Actions
+
+Route::prefix('invitations')->group(function () {
+    Route::post('invite', 'InvitationsController@invite')->name('invitations.invite');
+    Route::get('delete/{user_id}/{meeting_id}', 'InvitationsController@delete')->name('invitations.delete');
+    Route::get('setState/{meeting_id}/{state}', 'InvitationsController@setState')->name('invitations.setState');
+});

@@ -1,4 +1,4 @@
-window.rotate = (circles) => {
+var rotate = (circles) => {
     var deg = 360 / circles;
     $('.avatar-container').each((i, elem) => {
         var startDeg = $(elem).css('--endDeg');
@@ -12,7 +12,7 @@ window.rotate = (circles) => {
     })
 };
 
-window.searchUser = () => {
+window.searchUserForCircle = () => {
     $result = $('#search-result');
     $result.empty();
     $result.append(
@@ -138,9 +138,9 @@ $('#add')
         content: '' +
             '<div></div>' +
             '<div class="input-group mb-1">' +
-                '<input id="s" onkeypress="if(event.which == 13)searchUser()" autofocus class="form-control" placeholder="' + lang.search + '" type="text">' +
+                '<input id="s" onkeypress="if(event.which == 13)searchUserForCircle()" autofocus class="form-control" placeholder="' + lang.search + '" type="text">' +
                 '<div class="input-group-append">' +
-                    '<button onclick="searchUser()" class="btn btn-outline-info"><i class="fas fa-search"></i></button>' +
+                    '<button onclick="searchUserForCircle()" class="btn btn-outline-info"><i class="fas fa-search"></i></button>' +
                 '</div>' +
             '</div>' +
             '<ul id="search-result" class="list-group">' +

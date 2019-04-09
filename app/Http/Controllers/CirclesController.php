@@ -34,12 +34,12 @@ class CirclesController extends Controller
     public function create(Request $request)
     {
         $request->validate([
-            'name' => 'required|max:255'
+            'name_circle' => 'required|max:255'
         ]);
 
         $circle = new Circle;
 
-        $circle->name = $request->name;
+        $circle->name = $request->name_circle;
         $circle->is_private = $request->is_private ?? true;
         $circle->user_id = \Auth::id();
 
@@ -97,7 +97,8 @@ class CirclesController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function show($id) {
+    public function show($id)
+    {
         $circle = Circle::findOrFail($id);
 
         $this->authorize('show', $circle);
@@ -114,7 +115,7 @@ class CirclesController extends Controller
      */
     public function delete($id)
     {
-        $circle = Circle::find($id);
+        $circle = Circle::findOrFail($id);
 
         $this->authorize('edit', $circle);
 

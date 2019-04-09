@@ -28,7 +28,7 @@ class Membership extends Model
      */
     public function user()
     {
-        return $this->hasOne('App/User');
+        return $this->hasOne(User::class);
     }
 
     /**
@@ -37,6 +37,6 @@ class Membership extends Model
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
     public function circle() {
-        return $this->hasOne('App/Circle');
+        return $this->hasOne(Circle::class);
     }
 }
