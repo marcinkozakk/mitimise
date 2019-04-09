@@ -56,6 +56,11 @@ class User extends Authenticatable implements MustVerifyEmail
             ->where('circles.user_id', '!=', $this->id);
     }
 
+    /**
+     * Return meetings that user is an organizer of. Used for displaying on home page
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function meetings() {
         return $this->hasMany('App\Meeting', 'organizer_id')
             ->where('is_canceled', 0)                                           // not canceled
@@ -72,6 +77,11 @@ class User extends Authenticatable implements MustVerifyEmail
             ->orderBy('starts_at');
     }
 
+    /**
+     * Return meetings that user is invited for. Used for displaying on home page
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function meetingsInvited() {
         return $this->belongsToMany('App\Meeting', 'invitations')
             ->where('meetings.organizer_id', '!=', $this->id)                     // not yours meetings

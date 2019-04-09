@@ -9,13 +9,31 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
+/**
+ * This controller is responsible for handling meetings actions requests
+ *
+ * Class MeetingsController
+ * @package App\Http\Controllers
+ */
 class MeetingsController extends Controller
 {
+    /**
+     * MeetingsController constructor.
+     */
     public function __construct()
     {
         $this->middleware('auth');
     }
 
+    /**
+     * Create new meeting and first guest (current user) - organizer.
+     * If circle id is given, then invite all members of the circle
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
+     * @throws \Throwable
+     */
     public function create(Request $request)
     {
         $request->validate([
@@ -61,6 +79,14 @@ class MeetingsController extends Controller
         return back()->withInput();
     }
 
+    /**
+     * Update specific meeting
+     *
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
     public function update(Request $request, $id)
     {
         $request->validate([
@@ -91,6 +117,13 @@ class MeetingsController extends Controller
         return redirect()->route('meetings.show', ['id' => $meeting->id]);
     }
 
+    /**
+     * Show meeting view
+     *
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
     public function show($id)
     {
         $meeting = Meeting::findOrFail($id);
@@ -100,6 +133,14 @@ class MeetingsController extends Controller
         return view('meetings.show', ['meeting' => $meeting]);
     }
 
+    /**
+     * Set specific meeting as canceled
+     *
+     * @param $id Meeting id
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     * @throws \Throwable
+     */
     public function cancel($id)
     {
         $meeting = Meeting::find($id);
