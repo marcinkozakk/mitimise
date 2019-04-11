@@ -4,32 +4,37 @@ namespace Tests\Unit;
 
 use App\Circle;
 use App\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
 
 class CircleTest extends TestCase
 {
+    use RefreshDatabase;
+
     public $data = [
         'name' => 'Test circle',
     ];
 
-    public function testNewCircle()
+    public function testCircle()
     {
-        global $user;
+        /**
+         * Creating circle
+         */
         $user = factory(User::class)->create();
         $response = $this
             ->actingAs($user)
             ->post('circles/create', [
-                'name' => ''
+                'name_circle' => ''
             ]);
 
         $response->assertRedirect($_SERVER['APP_URL']);
-        $response->assertSessionHasErrors(['name']);
+        $response->assertSessionHasErrors(['name_circle']);
 
         $response = $this
             ->actingAs($user)
             ->post('circles/create', [
-                'name' => $this->data['name'],
+                'name_circle' => $this->data['name'],
                 'is_private' => false
             ]);
 
@@ -37,11 +42,12 @@ class CircleTest extends TestCase
         $response->assertRedirect();
 
         $this->assertDatabaseHas('circles', ['name' => $this->data['name']]);
-    }
 
-    public function testShowCircle()
-    {
-        global $user;
+
+
+        /**
+         * Showing circle
+         */
         $circle = DB::table('circles')->first();
 
         $this->assertTrue($circle->name == $this->data['name']);
@@ -60,13 +66,12 @@ class CircleTest extends TestCase
             ->get('circles/show/' . $circle->id);
 
         $response->assertForbidden();
-    }
 
-    public function testDeleteCircle()
-    {
-        global $user;
-        $circle = DB::table('circles')->first();
 
+
+        /**
+         * Deleting circle
+         */
         $otherUser = factory(User::class)->create();
 
         $response = $this
