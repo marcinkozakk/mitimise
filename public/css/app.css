@@ -10623,7 +10623,7 @@ a.text-dark:focus {
   line-height: 7rem;
   border-radius: 50%;
   display: inline-block;
-  border: 2px solid black;
+  border: 2px solid #343a40;
 }
 
 .show-meeting .count.green {
@@ -10636,7 +10636,7 @@ a.text-dark:focus {
 
 .show-meeting .btn-going {
   background-color: #4caf50a6;
-  border-color: #000;
+  border-color: #343a40;
   color: #000;
   white-space: normal;
 }
@@ -10647,7 +10647,7 @@ a.text-dark:focus {
 
 .show-meeting .btn-cant {
   background-color: #f6993fa6;
-  border-color: #000;
+  border-color: #343a40;
   color: #000;
   white-space: normal;
 }
@@ -10658,7 +10658,7 @@ a.text-dark:focus {
 
 .show-meeting .btn-undecided {
   background-color: #9e9e9ea6;
-  border-color: #000;
+  border-color: #343a40;
   color: #000;
   white-space: normal;
 }
@@ -10671,6 +10671,36 @@ a.text-dark:focus {
   position: absolute;
   width: 100%;
   height: 100%;
+}
+
+.comments form.going {
+  text-align: right;
+}
+
+.comments .row.going textarea {
+  background-color: #c1e3c3;
+  border-color: #343a40;
+}
+
+.comments .row.going .comment-content {
+  background-color: #4caf50a6;
+}
+
+.comments .row.undecided {
+  text-align: right;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: reverse;
+      -ms-flex-direction: row-reverse;
+          flex-direction: row-reverse;
+}
+
+.comments .row.undecided textarea {
+  background-color: #dbdbdb;
+  border-color: #343a40;
+}
+
+.comments .row.undecided .comment-content {
+  background-color: #bebebf;
 }
 
 .navbar-laravel {

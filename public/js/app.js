@@ -38050,6 +38050,9 @@ var addGuest = function addGuest(id, name, photo) {
 };
 
 $('#locked-modal').modal();
+$('a[data-target="#delete-comment"]').on('click', function (e) {
+    $('input[name="comment_id"]').val($(e.currentTarget).data('comment-id'));
+});
 
 /***/ }),
 /* 42 */

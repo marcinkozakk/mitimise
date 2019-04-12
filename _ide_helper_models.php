@@ -25,6 +25,7 @@ namespace App{
  * @property int $is_canceled
  * @property int $organizer_id
  * @property int|null $place_id
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Comment[] $comments
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\User[] $guests
  * @property-read \App\User $organizer
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Meeting whereCreatedAt($value)
@@ -111,6 +112,27 @@ namespace App{
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Membership whereUserId($value)
  */
 	class Membership extends \Eloquent {}
+}
+
+namespace App{
+/**
+ * App\Comment
+ *
+ * @property int $id
+ * @property string $content
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property int $meeting_id
+ * @property int $user_id
+ * @property-read \App\User $user
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Comment whereContent($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Comment whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Comment whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Comment whereMeetingId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Comment whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Comment whereUserId($value)
+ */
+	class Comment extends \Eloquent {}
 }
 
 namespace App{

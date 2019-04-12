@@ -51,6 +51,7 @@ Route::prefix('meetings')->group(function () {
     Route::post('create', 'MeetingsController@create')->name('meetings.create');
     Route::post('update/{id}', 'MeetingsController@update')->name('meetings.update');
     Route::get('cancel/{id}', 'MeetingsController@cancel')->name('meetings.cancel');
+    Route::post('revertCancelation/{id}', 'MeetingsController@revertCancelation')->name('meetings.revert');
 });
 
 //Invitations Actions
@@ -59,4 +60,9 @@ Route::prefix('invitations')->group(function () {
     Route::post('invite', 'InvitationsController@invite')->name('invitations.invite');
     Route::get('delete/{user_id}/{meeting_id}', 'InvitationsController@delete')->name('invitations.delete');
     Route::get('setState/{meeting_id}/{state}', 'InvitationsController@setState')->name('invitations.setState');
+});
+
+Route::prefix('comments')->group(function() {
+    Route::post('create/{meeting_id}', 'CommentsController@create')->name('comments.create');
+    Route::post('delete', 'CommentsController@delete')->name('comments.delete');
 });

@@ -154,4 +154,19 @@ class MeetingsController extends Controller
         return redirect()->back();
     }
 
+    public function revertCancelation(Request $request, $id)
+    {
+        $meeting = Meeting::find($id);
+
+        $this->authorize('revertCancelation', $meeting);
+
+        $meeting->is_canceled = 0;
+
+        $meeting->saveOrFail();
+
+        $this->update($request, $id);
+
+        return redirect()->back();
+    }
+
 }
