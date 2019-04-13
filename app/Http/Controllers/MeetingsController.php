@@ -154,6 +154,15 @@ class MeetingsController extends Controller
         return redirect()->back();
     }
 
+    /**
+     * Set canceled meeting as active
+     *
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     * @throws \Throwable
+     */
     public function revertCancelation(Request $request, $id)
     {
         $meeting = Meeting::find($id);

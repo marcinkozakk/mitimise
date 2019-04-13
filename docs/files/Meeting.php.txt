@@ -30,5 +30,15 @@ class Meeting extends Model
         return $this->belongsTo('App\User');
     }
 
+    /**
+     * Return meeting comments in reverse chronological order
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function comments()
+    {
+        return $this->hasMany('App\Comment')->orderBy('created_at', 'desc');
+    }
+
 }
 

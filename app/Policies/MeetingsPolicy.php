@@ -65,15 +65,37 @@ class MeetingsPolicy
         return $meeting->organizer_id != $user->id && $meeting->guests->contains('id', $user->id) && !$meeting->is_canceled;
     }
 
+    /**
+     * Check if user is authorized to comment to the meeting
+     *
+     * @param User $user
+     * @param Meeting $meeting
+     * @return bool
+     */
     public function comment(User $user, Meeting $meeting)
     {
         return $meeting->guests->contains('id', $user->id) && !$meeting->is_canceled;
     }
 
+    /**
+     * Check if user is authorized to delete comment in the meeting
+     *
+     * @param User $user
+     * @param Meeting $meeting
+     * @param Comment $comment
+     * @return bool
+     */
     public function deleteComment(User $user, Meeting $meeting, Comment $comment) {
         return $meeting->organizer_id == $user->id || $comment->user_id == $user->id;
     }
 
+    /**
+     * Check if user is authorized to revert cancelation of the meeting
+     *
+     * @param User $user
+     * @param Meeting $meeting
+     * @return bool
+     */
     public function revertCancelation(User $user, Meeting $meeting)
     {
         return $meeting->organizer_id == $user->id && $meeting->is_canceled;
