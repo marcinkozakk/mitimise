@@ -10667,6 +10667,36 @@ a.text-dark:focus {
   background-color: #9e9e9e;
 }
 
+.show-meeting .date-poll button.text-danger:hover {
+  color: #c51f1a !important;
+}
+
+.show-meeting .date-poll button.text-success:hover {
+  color: #2d995b !important;
+}
+
+.show-meeting .date-poll .btn.current:hover {
+  color: #3490dc !important;
+}
+
+.show-meeting .date-poll .btn.current:hover i::before {
+  content: "\F0E2";
+}
+
+.show-meeting .date-poll .avatar-container img {
+  border-radius: 50%;
+  border: 2px solid;
+  width: 3em;
+}
+
+.show-meeting .date-poll .avatar-container img.yes {
+  border-color: #38c172;
+}
+
+.show-meeting .date-poll .avatar-container img.no {
+  border-color: #e3342f;
+}
+
 .locked {
   position: absolute;
   width: 100%;

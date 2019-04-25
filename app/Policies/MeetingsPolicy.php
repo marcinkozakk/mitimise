@@ -65,6 +65,12 @@ class MeetingsPolicy
         return $meeting->organizer_id != $user->id && $meeting->guests->contains('id', $user->id) && !$meeting->is_canceled;
     }
 
+    //set your availability
+    public function setAvailability(User $user, Meeting $meeting)
+    {
+        return $meeting->guests->contains('id', $user->id) && !$meeting->is_canceled;
+    }
+
     /**
      * Check if user is authorized to comment to the meeting
      *

@@ -99,6 +99,21 @@
   "write comment...": "napisz komentarz...",
   "Submit": "Dodaj",
   "Delete comment": "Usuń komentarz",
-  "Are you sure to delete this comment?": "Jesteś pewien, że chcesz usunąć ten komentarz?"
-
+  "Are you sure to delete this comment?": "Jesteś pewien, że chcesz usunąć ten komentarz?",
+  "Choice has been saved": "Wybór został zapisany",
+  "Unable to save your choice": "Nie można było zapisać twojego wyboru",
+  "Day has been deleted": "Dzień został usunięty z ankiety",
+  "Unable to delete day": "Nie mozna było usunąć tego dnia z ankiety",
+  "Date poll": "Ankieta dostępności",
+  "Availability": "Dostępność",
+  "Available": "Dostępni",
+  "Unavailable": "Niedostępni",
+  "Create date poll and get to know when your guests are available": "Utwórz ankietę dostępności, aby dowiedzieć się kiedy twoi goście mogą wziąć udział w spotkaniu",
+  "Set as starting day": "Ustaw jako datę rozpoczęcia",
+  "Delete this day from poll": "Usuń dzień z ankiety",
+  "Propose date": "Zaproponuj dzień",
+  "Add": "Dodaj",
+  "Delete day from poll": "Usuwanie dnia z ankiety",
+  "Are you sure to delete this day from poll?": "Jesteś pewien, że chcesz usunąć ten dzień z ankiety?",
+  "Set date": "Ustaw datę"
 }
