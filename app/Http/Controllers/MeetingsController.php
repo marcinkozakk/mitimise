@@ -117,6 +117,14 @@ class MeetingsController extends Controller
         return redirect()->route('meetings.show', ['id' => $meeting->id]);
     }
 
+    /**
+     * Set date for meeting
+     *
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
     public function setDate(Request $request, $id)
     {
         $meeting = Meeting::findOrFail($id);

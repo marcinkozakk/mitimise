@@ -36,6 +36,10 @@ class CommentsController extends Controller
     {
         $this->authorize('comment', Meeting::findOrFail($meeting_id));
 
+        $request->validate([
+            'comment_content' => 'required',
+        ]);
+
         $comment = new Comment();
 
         $comment->content = $request->comment_content;

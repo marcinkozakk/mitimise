@@ -41,6 +41,11 @@ class Meeting extends Model
         return $this->hasMany('App\Comment')->orderBy('created_at', 'desc');
     }
 
+    /**
+     * Return date polls for meeting
+     *
+     * @return DatePoll[]|\Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Query\Builder[]|\Illuminate\Support\Collection
+     */
     public function getDatePollsAttribute()
     {
         $dates = DatePoll::where('meeting_id', $this->id)
