@@ -20,7 +20,7 @@
   "Visible only to you": "Widoczny tylko dla ciebie",
   "Visible to all members": "Widoczny dla wszystkich członków",
   "Cancel": "Anuluj",
-  "Create": "Stwórz",
+  "Create": "Utwórz",
   "Edit circle": "Edytuj krąg",
   "Edit": "Edytuj",
   "Delete circle": "Usuwanie kręgu",
@@ -86,7 +86,7 @@
   "Meetings you are invited for": "Spotkania, na które jesteś zaproszony",
   "You aren't invited for any meeting": "Nie jesteś zaproszony na żadne spotkanie",
   "going": "wezmę udział",
-  "Remove form meeting": "Usuń z wydarzenia",
+  "Remove form meeting": "Usuń ze spotkania",
   "undecided": "niezdecydowany",
   "Revert meeting": "Przywróć spotkanie",
   "Revert": "Przywróć",
@@ -115,5 +115,14 @@
   "Add": "Dodaj",
   "Delete day from poll": "Usuwanie dnia z ankiety",
   "Are you sure to delete this day from poll?": "Jesteś pewien, że chcesz usunąć ten dzień z ankiety?",
-  "Set date": "Ustaw datę"
+  "Set date": "Ustaw datę",
+  "Place": "Miejsce",
+  "type place name...": "wpisz nazwę miejsca...",
+  "Place name": "Nazwa miejsca",
+  "Place address": "Adres",
+  "This address is private, only guests are able to see it": "Ten adres jest prywatny, tylko goście będą mogli go zobaczyć",
+  "Close": "Zamknij",
+  "Find your friends": "Wyszukaj znajomych",
+  "Create circles of friends": "Twórz kręgi znajomych",
+  "Plan meetings": "Planuj spotkania"
 }

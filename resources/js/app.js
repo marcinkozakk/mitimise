@@ -9,6 +9,7 @@ require('./bootstrap');
 require('./userPhoto');
 require('./showCircle');
 require('./showMeeting');
+require('./map');
 
 $('.modal').on('shown.bs.modal', function() {
     $(this).find('[autofocus]').focus();

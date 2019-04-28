@@ -41,6 +41,11 @@ class Meeting extends Model
         return $this->hasMany('App\Comment')->orderBy('created_at', 'desc');
     }
 
+    public function place()
+    {
+        return $this->belongsTo('App\Place');
+    }
+
     /**
      * Return date polls for meeting
      *

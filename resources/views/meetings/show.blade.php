@@ -22,6 +22,10 @@ $groupedGuests = $meeting->guests->groupBy('pivot.state');
 
     </div>
 
+    @if($meeting->place)
+        @include('meetings.map-modal')
+    @endif
+
     @can('revertCancelation', $meeting)
         @include('meetings.revert-modal')
     @endcan

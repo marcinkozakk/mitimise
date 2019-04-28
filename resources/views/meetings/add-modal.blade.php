@@ -1,5 +1,5 @@
 <div class="modal fade" id="add-meeting" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
             <form method="post" action="{{ route('meetings.create') }}">
                 @csrf
@@ -18,7 +18,7 @@
                             {{ __('Name') }}
                         </label>
 
-                        <div class="col-md-6">
+                        <div class="col-md-8">
                             <input id="name" type="text" class="form-control{{ $errors->has('name_meeting') ? ' is-invalid' : '' }}" name="name_meeting" value="{{ old('name_meeting') }}" required autofocus>
 
                             @if ($errors->has('name_meeting'))
@@ -34,7 +34,7 @@
                             {{ __('Description') }}
                         </label>
 
-                        <div class="col-md-6">
+                        <div class="col-md-8">
                             <textarea id="description" type="text" class="form-control{{ $errors->has('description') ? ' is-invalid' : '' }}" name="description">{{
                             old('description')
                             }}</textarea>
@@ -80,26 +80,33 @@
                                 <label class="form-check-label pl-1" for="defaultCheck1">
                                     {{ __('Don\'t set now') }}
                                 </label>
-                                <div class="form-group dates-group p-1">
-                                    <label class="mb-0" for="starts_at">{{ __('Starts at') }}</label>
-                                    <input class="form-control{{ $errors->has('starts_at') ? ' is-invalid' : '' }}" type="datetime-local" name="starts_at" id="starts_at" value="{{ date('Y-m-d\TH:i', strtotime('tomorrow 18:00')) }}">
-                                    @if ($errors->has('starts_at'))
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('starts_at') }}</strong>
-                                        </span>
-                                    @endif
+                                <div class="form-group dates-group p-1 row">
+                                    <div class="col-6">
+                                        <label class="mb-0" for="starts_at">{{ __('Starts at') }}</label>
+                                        <input class="form-control{{ $errors->has('starts_at') ? ' is-invalid' : '' }}" type="datetime-local" name="starts_at" id="starts_at" value="{{ date('Y-m-d\TH:i', strtotime('tomorrow 18:00')) }}">
+                                        @if ($errors->has('starts_at'))
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $errors->first('starts_at') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
 
-                                    <label class="mb-0" for="ends_at">{{ __('Ends at') }}</label>
-                                    <input class="form-control{{ $errors->has('ends_at') ? ' is-invalid' : '' }}" type="datetime-local" name="ends_at" id="ends_at" value="{{ date('Y-m-d\TH:i', strtotime('tomorrow 23:00')) }}">
-                                    @if ($errors->has('ends_at'))
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('ends_at') }}</strong>
-                                        </span>
-                                    @endif
+                                    <div class="col-6">
+                                        <label class="mb-0" for="ends_at">{{ __('Ends at') }}</label>
+                                        <input class="form-control{{ $errors->has('ends_at') ? ' is-invalid' : '' }}" type="datetime-local" name="ends_at" id="ends_at" value="{{ date('Y-m-d\TH:i', strtotime('tomorrow 23:00')) }}">
+                                        @if ($errors->has('ends_at'))
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $errors->first('ends_at') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+
+                    @include('meetings.partials.setPlace')
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('Cancel') }}</button>

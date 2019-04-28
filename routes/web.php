@@ -19,6 +19,8 @@ Auth::routes(['verify' => true]);
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('lang/{lang}', 'LanguagesController@set')->name('lang.set');
+
 //User Actions
 
 Route::prefix('users')->group(function () {

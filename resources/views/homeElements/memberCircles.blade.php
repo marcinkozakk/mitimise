@@ -4,7 +4,7 @@
     $circles = $user->memberCircles;
     @endphp
     @if($circles->count() == 0)
-        <div class="card-body">
+        <div class="card-body p-0">
             <p class="list-group-item">{{ __('You aren\'t in any circle') }}</p>
         </div>
     @else

@@ -10733,6 +10733,15 @@ a.text-dark:focus {
   background-color: #bebebf;
 }
 
+#map,
+#map-show {
+  height: 300px;
+}
+
+.pac-container {
+  z-index: 100000;
+}
+
 .navbar-laravel {
   background-color: #fff;
   -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);

@@ -68,6 +68,11 @@
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
                 <div class="top-right links">
+                    @foreach (Config::get('app.availableLanguages') as $lang => $language)
+                        @if ($lang != App::getLocale())
+                            <a href="{{ route('lang.set', $lang) }}">{{$language}}</a>
+                        @endif
+                    @endforeach
                     @auth
                         <a href="{{ url('/home') }}">Home</a>
                     @else
@@ -83,9 +88,9 @@
                 </div>
 
                 <div class="links">
-                    <a href="https://laravel.com/docs">Wyszukaj znajomych</a>
-                    <a href="https://laracasts.com">Twórz kręgi znajomych</a>
-                    <a href="https://laravel-news.com">Organizuj spotkania</a>
+                    <a href="{{ route('home') }}">{{ __('Find your friends') }}</a>
+                    <a href="{{ route('home') }}">{{ __('Create circles of friends') }}</a>
+                    <a href="{{ route('home') }}">{{ __('Plan meetings') }}</a>
                 </div>
             </div>
         </div>
