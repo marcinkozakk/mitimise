@@ -66,6 +66,7 @@ class Meeting extends Model
         foreach ($dates as $i => $date) {
             $dates[$i]['polls'] = DatePoll::where('date', $date->date)
                 ->where('availability', '!=', 'null')
+                ->where('meeting_id', $this->id)
                 ->orderBy('availability')
                 ->get();
         }

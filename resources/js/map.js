@@ -1,5 +1,5 @@
 var GoogleMapsLoader = require('google-maps');
-GoogleMapsLoader.KEY = 'AIzaSyCZ-q6zCJ7m9oVsDqo5dwPRRz874zWYG4Q';
+GoogleMapsLoader.KEY = GoogleMapsKey;
 GoogleMapsLoader.VERSION = '3.34';
 GoogleMapsLoader.LIBRARIES = ['places'];
 
