@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Circle;
 use App\Invitation;
 use App\Meeting;
+use App\Place;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -40,6 +41,10 @@ class MeetingsController extends Controller
             'name_meeting' => 'required|max:255',
             'starts_at' => 'nullable|date|after:now',
             'ends_at' => 'nullable|date|after:starts_at',
+            'place_name' => 'max:255',
+            'place_address' => 'max:255',
+            'place_lat' => 'nullable|numeric|between:-90,90',
+            'place_lng' => 'nullable|numeric|between:-180,180'
         ]);
 
         $meeting = new Meeting;
@@ -55,12 +60,25 @@ class MeetingsController extends Controller
             $meeting->ends_at = $request->ends_at;
         }
 
+        if(!empty($request->place_name)) {
+            $place = new Place;
+
+            $place->name = $request->place_name;
+            $place->address = $request->place_address;
+            $place->lat = $request->place_lat;
+            $place->lng = $request->place_lng;
+            $place->is_private = $request->place_private ? 1 : 0;
+
+            $place->save();
+            $meeting->place_id = $place->id;
+        }
+
         if($meeting->save()) {
             $organizer = new Invitation;
+
             $organizer->user_id = Auth::id();
             $organizer->meeting_id = $meeting->id;
             $organizer->state = 'going';
-
 
             if($organizer->save()) {
                 if($request->circle_id) {
@@ -93,6 +111,10 @@ class MeetingsController extends Controller
             'name' => 'required|max:255',
             'starts_at' => 'nullable|date|after:now',
             'ends_at' => 'nullable|date|after:starts_at',
+            'place_name' => 'max:255',
+            'place_address' => 'max:255',
+            'place_lat' => 'nullable|numeric|between:-90,90',
+            'place_lng' => 'nullable|numeric|between:-180,180'
         ]);
 
         $meeting = Meeting::findOrFail($id);
@@ -102,6 +124,24 @@ class MeetingsController extends Controller
         $meeting->name = $request->name;
         $meeting->description = $request->description ? $request->description : '';
         $meeting->is_private = $request->is_private;
+
+        if(!empty($request->place_name)) {
+            if(!$meeting->place) {
+                $place = new Place;
+            } else {
+                $place = &$meeting->place;
+            }
+
+            $place->name = $request->place_name;
+            $place->address = $request->place_address ?? '';
+            $place->lat = $request->place_lat;
+            $place->lng = $request->place_lng;
+            $place->is_private = $request->place_private ? 1 : 0;
+
+            $place->save();
+
+            $meeting->place_id = $place->id;
+        }
 
         if(!$request->null_date) {
             $meeting->starts_at = $request->starts_at;

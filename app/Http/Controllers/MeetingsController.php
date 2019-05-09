@@ -133,7 +133,7 @@ class MeetingsController extends Controller
             }
 
             $place->name = $request->place_name;
-            $place->address = $request->place_address;
+            $place->address = $request->place_address ?? '';
             $place->lat = $request->place_lat;
             $place->lng = $request->place_lng;
             $place->is_private = $request->place_private ? 1 : 0;

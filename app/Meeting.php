@@ -7,7 +7,39 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Meeting
+ *
  * @package App
+ * @property int $id
+ * @property string $name
+ * @property string|null $starts_at
+ * @property string|null $ends_at
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property string $description
+ * @property int $is_private
+ * @property int $is_canceled
+ * @property int $organizer_id
+ * @property int|null $place_id
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Comment[] $comments
+ * @property-read \DatePoll[]|\Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Query\Builder[]|\Illuminate\Support\Collection $date_polls
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\User[] $guests
+ * @property-read \App\User $organizer
+ * @property-read \App\Place|null $place
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Meeting newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Meeting newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Meeting query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Meeting whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Meeting whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Meeting whereEndsAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Meeting whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Meeting whereIsCanceled($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Meeting whereIsPrivate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Meeting whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Meeting whereOrganizerId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Meeting wherePlaceId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Meeting whereStartsAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Meeting whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
 class Meeting extends Model
 {

@@ -129,7 +129,7 @@ class MeetingTest extends TestCase
             ->actingAs($user)
             ->get('meetings/show/' . $meeting->id);
 
-        $response->assertSee('To spotkanie jest odwołane');
+        $response->assertSee('Meeting is canceled');
 
     }
 }
