@@ -17,6 +17,11 @@ Route::get('/', function () {
 
 Auth::routes(['verify' => true]);
 
+Route::get('/loginWithFacebook', 'FacebookController@loginWithFacebook')->name('auth.loginWithFacebook');
+Route::get('/facebookCallback', 'FacebookController@facebookCallback')->name('auth.facebookCallback');
+Route::get('/facebookPicture', 'FacebookController@facebookPicture')->name('facebook.picture');
+Route::get('/facebookPictureCallback', 'FacebookController@pictureCallback')->name('facebook.pictureCallback');
+
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('lang/{lang}', 'LanguagesController@set')->name('lang.set');

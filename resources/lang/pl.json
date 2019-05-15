@@ -124,5 +124,9 @@
   "Close": "Zamknij",
   "Find your friends": "Wyszukaj znajomych",
   "Create circles of friends": "Twórz kręgi znajomych",
-  "Plan meetings": "Planuj spotkania"
+  "Plan meetings": "Planuj spotkania",
+  "Facebook has returned an error: ": "Facebook zwrócił błąd: ",
+  "Login with Facebook": "Zaloguj się Facebookiem",
+  "Or": "Lub",
+  "Import Facebook Picture": "Zaimportuj zdjęcie z Facebooka"
 }

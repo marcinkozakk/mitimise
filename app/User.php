@@ -41,6 +41,8 @@ use Illuminate\Support\Facades\Storage;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereRememberToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property string|null $facebook_id
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereFacebookId($value)
  */
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -52,7 +54,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'email_verified_at',
     ];
 
     /**

@@ -51,7 +51,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row mb-0">
+                        <div class="form-group row">
                             <div class="col-md-8 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Login') }}
@@ -59,6 +59,17 @@
 
                                 <a class="btn btn-link" href="{{ route('password.request') }}">
                                     {{ __('Forgot Your Password?') }}
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="form-group row mb-0">
+                            <label class="col-md-4 col-form-label text-md-right">{{ __('Or') }}</label>
+
+                            <div class="col-md-6">
+                                <a class="btn btn-fb" href="{{ route('auth.loginWithFacebook') }}">
+                                    <i class="fab fa-facebook-square mr-2"></i>
+                                    {{ __('Login with Facebook') }}
                                 </a>
                             </div>
                         </div>

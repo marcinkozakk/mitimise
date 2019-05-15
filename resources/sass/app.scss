@@ -37,3 +37,14 @@ img {
 a {
   cursor: pointer;
 }
+
+.btn-fb {
+  background-color: #4267b2;
+  border-color: #4267b2;
+  color: #fff;
+
+  &:hover {
+    color: #fff;
+    background-color: #395091;
+  }
+}

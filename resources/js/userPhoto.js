@@ -32,6 +32,13 @@ if($form.length > 0) {
         }
     });
 
+    if(window.photo_url !== undefined) {
+        $('.crop-container').removeClass('d-none');
+        resize.croppie('bind',{
+            url: photo_url
+        })
+    }
+
     $('input#photo').on('change', (e) => {
         if(e.target.files.length > 0) {
             const reader = new FileReader();

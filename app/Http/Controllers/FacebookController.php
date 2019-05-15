@@ -1,0 +1,289 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\User;
+use Facebook\Authentication\AccessToken;
+use Facebook\Exceptions\FacebookSDKException;
+use Facebook\Facebook;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
+
+/**
+ * This controller is responsible for facebook services (accessToken, login with facebook, get facebook picture)
+ *
+ * Class FacebookController
+ * @package App\Http\Controllers\Auth
+ */
+class FacebookController extends Controller
+{
+
+    /**
+     * Where to route after login with facebook
+     *
+     * @var string
+     */
+    protected $routeTo = 'users.me';
+
+    /**
+     * Service is created on first use
+     *
+     * @var Facebook
+     */
+    protected $facebookService;
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('guest')->only(['loginWithFacebook', 'facebookCallback']);
+        $this->middleware('auth')->only(['facebookPicture', 'pictureCallback']);
+    }
+
+    /**
+     * Handle redirect to facebook login page
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function loginWithFacebook()
+    {
+        try {
+            $loginUrl = $this->getLoginUrl(route('auth.facebookCallback'));
+        } catch (FacebookSDKException $e) {
+            Session::flash('alert-danger', __('Facebook has returned an error: ') . $e->getMessage());
+            return back();
+        }
+        return redirect($loginUrl);
+    }
+
+    /**
+     * Callback for facebook login
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    public function facebookCallback()
+    {
+        try {
+            $accessToken = $this->getAccessToken();
+            $facebookUser = $this->getFacebookUser($accessToken);
+        } catch (FacebookSDKException $e) {
+            Session::flash('alert-danger', __('Facebook has returned an error: ') . $e->getMessage());
+            return back();
+        }
+
+        $user = User::whereEmail([
+            'email' => $facebookUser['email']
+        ])->first();
+
+        if($user === null) {
+            $this->validator($facebookUser)->validate();
+
+            event(new Registered($user = $this->create($facebookUser)));
+        } else if($user->facebook_id === null) {
+            $this->validator($facebookUser)->validate();
+
+            $user->facebook_id = $facebookUser['id'];
+            $user->save();
+        } else {
+            $this->routeTo = 'home';
+        }
+
+        Auth::guard()->login($user, true);
+
+        return redirect()->route($this->routeTo);
+    }
+
+    /**
+     * Handle redirect to facebook login page if access token is not valid. If else, call $this->pictureCallback
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function facebookPicture()
+    {
+        if($this->readAccessToken()) {
+            return $this->pictureCallback();
+        }
+
+        try {
+            $loginUrl = $this->getLoginUrl(route('facebook.pictureCallback'));
+        } catch (FacebookSDKException $e) {
+            Session::flash('alert-danger', __('Facebook has returned an error: ') . $e->getMessage());
+            return back();
+
+        }
+        return redirect($loginUrl);
+    }
+
+    /**
+     * Get facebook user picture url and redirect to user page with it
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function pictureCallback()
+    {
+        try {
+            $accessToken = $this->getAccessToken();
+            $pictureUrl = $this->getUserPictureUrl($accessToken);
+        } catch (FacebookSDKException $e) {
+            Session::flash('alert-danger', __('Facebook has returned an error: ') . $e->getMessage());
+            return back();
+        }
+        return redirect()->route('users.me')->with('photo_url', $pictureUrl);
+
+    }
+
+    /**
+     * Returns facebook access token from callback response
+     *
+     * @return \Facebook\Authentication\AccessToken|null
+     * @throws FacebookSDKException
+     */
+    private function getAccessToken()
+    {
+        if($accessToken = $this->readAccessToken()) {
+            return $accessToken;
+        }
+
+        $fb = $this->getFacebookService();
+        $helper = $fb->getRedirectLoginHelper();
+
+        $accessToken = $helper->getAccessToken();
+
+        Session::put('fb_access_token_value', $accessToken->getValue());
+        Session::put('fb_access_token_expires', $accessToken->getExpiresAt()->getTimestamp());
+
+        return $accessToken;
+    }
+
+    /**
+     * Check if access token is saved in session and is not expired and return it
+     *
+     * @return AccessToken|null
+     */
+    private function readAccessToken()
+    {
+        if(Session::has(['fb_access_token_value', 'fb_access_token_expires'])) {
+            $accessToken = new AccessToken(
+                Session::get('fb_access_token_value'),
+                Session::get('fb_access_token_expires')
+            );
+            return $accessToken->isExpired() ? null : $accessToken;
+        }
+        return null;
+    }
+
+    /**
+     * Returns facebook login url with given callback
+     *
+     * @param $redirectUrl
+     * @return string
+     * @throws FacebookSDKException
+     */
+    private function getLoginUrl($redirectUrl)
+    {
+        $fb = $this->getFacebookService();
+        $helper = $fb->getRedirectLoginHelper();
+
+        $permissions = ['email'];
+        return $helper->getLoginUrl($redirectUrl, $permissions);
+    }
+
+    /**
+     * Returns facebook user id, name and email
+     *
+     * @param Facebook $fb
+     * @param $accessToken
+     * @return array
+     * @throws FacebookSDKException
+     */
+    private function getFacebookUser($accessToken)
+    {
+        $fb = $this->getFacebookService();
+
+        $response = $fb->get(
+            'me?fields=id,name,email',
+            $accessToken
+        );
+        return $response->getDecodedBody();
+    }
+
+    /**
+     * Returns facebook user picture url
+     *
+     * @param $accessToken
+     * @return array
+     * @throws FacebookSDKException
+     */
+    private function getUserPictureUrl($accessToken)
+    {
+        $fb = $this->getFacebookService();
+
+        $response = $fb->get(
+            'me?fields=picture.width(500).height(500){url}',
+            $accessToken
+        );
+        return $response->getDecodedBody()['picture']['data']['url'];
+    }
+
+    /**
+     * Returns facebook service if exists or creates new
+     *
+     * @return Facebook
+     * @throws FacebookSDKException
+     */
+    private function getFacebookService()
+    {
+        if (!session_id()) {
+            session_start();
+        }
+
+        if($this->facebookService !== null) {
+            return $this->facebookService;
+        }
+
+        return new Facebook([
+            'app_id' => env('FACEBOOK_APP_KEY'),
+            'app_secret' => env('FACEBOOK_APP_SECRET'),
+            'default_graph_version' => 'v3.3',
+        ]);
+    }
+
+    /**
+     * Returns validator for facebook user data
+     *
+     * @param array $data
+     * @return \Illuminate\Contracts\Validation\Validator|\Illuminate\Validation\Validator
+     */
+    private function validator(array $data)
+    {
+        return Validator::make($data, [
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|max:255',
+            'id' => 'required|string|max:255',
+        ]);
+    }
+
+    /**
+     * Create new user from facebook user data
+     *
+     * @param array $data
+     * @return User|\Illuminate\Database\Eloquent\Model
+     */
+    private function create(array $data)
+    {
+        return $user = User::create([
+            'email' => $data['email'],
+            'password' => '',
+            'name' => $data['name'],
+            'email_verified_at' => now(),
+            'facebook_id' => 'id',
+        ]);
+    }
+
+}
