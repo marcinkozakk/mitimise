@@ -1,0 +1,42 @@
+<?php
+
+namespace App\Observers;
+
+use App\Circle;
+use App\Notifications\DefaultNotification;
+use Illuminate\Support\Facades\Notification;
+
+/**
+ * Class responsible for circle's events observation
+ *
+ * Class CircleObserver
+ * @package App\Observers
+ */
+class CircleObserver
+{
+    /**
+     * Handle the circle "deleting" event.
+     *
+     * @param  \App\Circle  $circle
+     * @return void
+     */
+    public function deleting(Circle $circle)
+    {
+        if(!$circle->is_private) {
+            Notification::send(
+                $circle
+                    ->members()
+                    ->where('user_id', '!=', \Auth::id())
+                    ->get(),
+                new DefaultNotification([
+                    'text' => ':doer deleted circle ":target", that you were a member of',
+                    'doer' => \Auth::user()->name,
+                    'target' => $circle->name,
+                    'icon' => 'user-times',
+                    'redirectTo' => '/home'
+                ])
+            );
+        }
+        $circle->members()->detach();
+    }
+}

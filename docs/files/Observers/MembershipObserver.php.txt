@@ -1,0 +1,36 @@
+<?php
+
+
+namespace App\Observers;
+
+use App\Notifications\DefaultNotification;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
+
+/**
+ * Class responsible for comment's events observation
+ *
+ * Class MembershipObserver
+ * @package App\Observers
+ */
+class MembershipObserver
+{
+    /**
+     * Handle the membership "created" event.
+     *
+     * @param  \App\Membership  $membership
+     * @return void
+     */
+    public function created($membership)
+    {
+        if(!$membership->circle->is_private && $membership->user->id != Auth::id()) {
+            Notification::send($membership->user, new DefaultNotification([
+                'text' => ':doer added you to the circle ":target"',
+                'doer' => Auth::user()->name,
+                'target' => $membership->circle->name,
+                'icon' => 'user-plus',
+                'redirectTo' => route('circles.show', ['id' => $membership->circle_id], false)
+            ]));
+        }
+    }
+}

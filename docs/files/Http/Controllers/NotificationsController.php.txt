@@ -1,0 +1,50 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Support\Facades\Auth;
+
+/**
+ * This controller is responsible for handling notifications actions requests
+ *
+ * Class NotificationsController
+ * @package App\Http\Controllers
+ */
+class NotificationsController extends Controller
+{
+    /**
+     * NotificationsController constructor.
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    /**
+     * Set given notification as read and redirect to notification target
+     *
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function show($id)
+    {
+        $notification = Auth::user()->notifications()->find($id);
+
+        $notification->markAsRead();
+
+        return redirect($notification->data['redirectTo']);
+    }
+
+    /**
+     * Show the user notifications list
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function index()
+    {
+        return view('notifications.list', [
+            'notifications' => Auth::user()->notifications
+        ]);
+    }
+}
+

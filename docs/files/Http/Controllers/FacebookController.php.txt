@@ -48,8 +48,7 @@ class FacebookController extends Controller
     /**
      * Handle redirect to facebook login page
      *
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
-     * @throws \Illuminate\Validation\ValidationException
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function loginWithFacebook()
     {
@@ -103,7 +102,7 @@ class FacebookController extends Controller
     /**
      * Handle redirect to facebook login page if access token is not valid. If else, call $this->pictureCallback
      *
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function facebookPicture()
     {

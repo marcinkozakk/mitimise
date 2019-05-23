@@ -83,3 +83,8 @@ Route::prefix('datePolls')->group(function() {
     Route::post('setAvailability/{meeting_id}', 'DatePollsController@setAvailability')->name('datePolls.setAvailability');
     Route::post('delete', 'DatePollsController@delete')->name('datePolls.delete');
 });
+
+//Notifications Actions
+
+Route::get('notification/{id}', 'NotificationsController@show')->name('notifications.route');
+Route::get('notifications', 'NotificationsController@index')->name('notifications.list');

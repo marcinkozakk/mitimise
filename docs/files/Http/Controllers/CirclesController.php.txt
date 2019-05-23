@@ -119,7 +119,6 @@ class CirclesController extends Controller
 
         $this->authorize('edit', $circle);
 
-        $circle->members()->detach();
         $circle->delete();
 
         Session::flash('alert-success', __('Circle has been deleted'));

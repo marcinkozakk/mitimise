@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Observers\CircleObserver;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -28,6 +29,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Circle whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Circle whereUserId($value)
  * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Membership[] $memberships
  */
 class Circle extends Model
 {
@@ -55,7 +57,8 @@ class Circle extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function members() {
+    public function members()
+    {
         return $this->belongsToMany('App\User', 'memberships')->orderBy('memberships.created_at', 'desc');
     }
 }

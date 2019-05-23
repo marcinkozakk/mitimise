@@ -10780,3 +10780,18 @@ a {
   background-color: #395091;
 }
 
+.notifications .fa-bell {
+  -webkit-transform: translateY(1px) scale(1.3);
+          transform: translateY(1px) scale(1.3);
+}
+
+@media (min-width: 768px) {
+  .notifications .notifications-list {
+    width: 400px;
+  }
+}
+
+.notifications .notifications-list .dropdown-item {
+  white-space: normal;
+}
+

@@ -96,6 +96,9 @@
                                 @endforeach
                             </ul>
                         </li>
+                            @auth
+                                @include('notifications.notifications')
+                            @endauth
                     </ul>
                 </div>
             </div>

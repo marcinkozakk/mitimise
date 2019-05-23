@@ -128,5 +128,18 @@
   "Facebook has returned an error: ": "Facebook zwrócił błąd: ",
   "Login with Facebook": "Zaloguj się Facebookiem",
   "Or": "Lub",
-  "Import Facebook Picture": "Zaimportuj zdjęcie z Facebooka"
+  "Import Facebook Picture": "Zaimportuj zdjęcie z Facebooka",
+  ":doer deleted circle \":target\", that you were a member of": ":doer usunął krąg \":target\", którego byłeś członkiem",
+  ":doer also commented \":target\"": ":doer także skomentował \":target\"",
+  ":doer commented on \":target\"": ":doer skomentował \":target\"",
+  ":doer invited you to \":target\"": ":doer zaprosił cię na \":target\"",
+  ":doer is going to \":target\"": ":doer weźmie udział w \":target\"",
+  ":doer is undecided about going to \":target\"": ":doer jest niezdecydowany, czy weźmie udział w \":target\"",
+  ":doer can't go to \":target\"": ":doer nie weźmie udziału w \":target\"",
+  ":doer updated details about \":target\"": ":doer zaktualizował informacje o \":target\"",
+  ":doer added you to the circle \":target\"": ":doer dodał cię do kręgu \":target\"",
+  "See all": "Zobacz wszystkie",
+  "Notifications": "Powiadomienia",
+  "Created at": "Kiedy utworzone",
+  "Read at": "Kiedy wyświetlone"
 }

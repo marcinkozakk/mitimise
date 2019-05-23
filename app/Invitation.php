@@ -26,6 +26,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Invitation whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Invitation whereUserId($value)
  * @mixin \Eloquent
+ * @property-read \App\Meeting $meeting
+ * @property-read \App\User $user
  */
 class Invitation extends Model
 {
@@ -37,6 +39,26 @@ class Invitation extends Model
     protected $fillable = [
         'user_id', 'state', 'meeting_id'
     ];
+
+    /**
+     * Return meeting which concerns invitation
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function meeting()
+    {
+        return $this->belongsTo(Meeting::class);
+    }
+
+    /**
+     * Return user who was invited to meeting
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
     /**
      * Create invitations from given array
