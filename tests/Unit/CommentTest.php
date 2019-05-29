@@ -6,6 +6,7 @@ use App\Invitation;
 use App\Meeting;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Auth;
 use Tests\TestCase;
 
 class CommentTest extends TestCase
@@ -22,6 +23,8 @@ class CommentTest extends TestCase
         $meeting = factory(Meeting::class)->create([
             'organizer_id' => $user->id
         ]);
+
+        $this->be($user);
         factory(Invitation::class)->create([
             'user_id' => $user->id,
             'meeting_id' => $meeting->id,

@@ -1,0 +1,60 @@
+<?php
+namespace App\Http\Controllers;
+use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
+use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Support\Facades\Auth;
+
+/**
+ * This controller is responsible for handling web push subscriptions
+ *
+ * Class PushSubscriptionController
+ * @package App\Http\Controllers
+ */
+class PushSubscriptionController extends Controller
+{
+    use ValidatesRequests;
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    /**
+     * Update user's subscription.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    public function update(Request $request)
+    {
+        $this->validate($request, ['endpoint' => 'required']);
+        Auth::user()->updatePushSubscription(
+            $request->endpoint,
+            $request->key,
+            $request->token
+        );
+
+        return response()->json(null, 204);
+    }
+
+    /**
+     * Delete the specified subscription.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    public function destroy(Request $request)
+    {
+        $this->validate($request, ['endpoint' => 'required']);
+        Auth::user()->deletePushSubscription($request->endpoint);
+        return response()->json(null, 204);
+    }
+}

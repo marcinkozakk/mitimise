@@ -28,7 +28,7 @@ class NotificationsController extends Controller
      */
     public function show($id)
     {
-        $notification = Auth::user()->notifications()->find($id);
+        $notification = Auth::user()->notifications()->whereKey($id)->first();
 
         $notification->markAsRead();
 

@@ -4,6 +4,8 @@ namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
+use NotificationChannels\WebPush\WebPushChannel;
+use NotificationChannels\WebPush\WebPushMessage;
 
 /**
  * Default notification saving in database
@@ -40,7 +42,7 @@ class DefaultNotification extends Notification
      */
     public function via($notifiable)
     {
-        return ['database'];
+        return ['database', WebPushChannel::class];
     }
 
     /**
@@ -58,5 +60,15 @@ class DefaultNotification extends Notification
             'icon' => $this->data['icon'],
             'redirectTo' => $this->data['redirectTo']
         ];
+    }
+
+    public function toWebPush($notifiable, $notification)
+    {
+        return (new WebPushMessage)
+            ->title(__($this->data['text'], [
+                'doer' => $this->data['doer'],
+                'target' => $this->data['target']
+            ]))
+            ->action(__('Show'), route('notifications.route', $notification->id));
     }
 }

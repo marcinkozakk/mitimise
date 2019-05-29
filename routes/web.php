@@ -88,3 +88,7 @@ Route::prefix('datePolls')->group(function() {
 
 Route::get('notification/{id}', 'NotificationsController@show')->name('notifications.route');
 Route::get('notifications', 'NotificationsController@index')->name('notifications.list');
+
+// Push Subscriptions Actions
+Route::post('subscriptions', 'PushSubscriptionController@update');
+Route::post('subscriptions/delete', 'PushSubscriptionController@destroy');

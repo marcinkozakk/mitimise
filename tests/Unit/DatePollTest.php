@@ -22,6 +22,7 @@ class DatePollTest extends TestCase
         $meeting = factory(Meeting::class)->create([
             'organizer_id' => $user->id
         ]);
+        $this->be($user);
         factory(Invitation::class)->create([
             'user_id' => $user->id,
             'meeting_id' => $meeting->id,

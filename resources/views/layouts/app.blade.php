@@ -14,6 +14,9 @@
     <!-- Footer Scripts -->
     @stack('scripts')
     <script src="{{ asset('js/app.js') }}" defer></script>
+    @auth
+        <script src="{{ asset('js/notifications.js') }}" defer></script>
+    @endauth
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
@@ -118,6 +121,7 @@
     </div>
     @stack('body-end')
     <script>
+        var vapidPublicKey = '{{ config('webpush.vapid.public_key') }}'
         var lang = {
             search: '{{ __('search...') }}',
         }

@@ -7,6 +7,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Storage;
+use NotificationChannels\WebPush\HasPushSubscriptions;
 
 /**
  * User model
@@ -43,10 +44,11 @@ use Illuminate\Support\Facades\Storage;
  * @mixin \Eloquent
  * @property string|null $facebook_id
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereFacebookId($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\NotificationChannels\WebPush\PushSubscription[] $pushSubscriptions
  */
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use Notifiable;
+    use Notifiable, HasPushSubscriptions;
 
     /**
      * The attributes that are mass assignable.
