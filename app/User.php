@@ -45,6 +45,9 @@ use NotificationChannels\WebPush\HasPushSubscriptions;
  * @property string|null $facebook_id
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereFacebookId($value)
  * @property-read \Illuminate\Database\Eloquent\Collection|\NotificationChannels\WebPush\PushSubscription[] $pushSubscriptions
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Meeting[] $placesVisited
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Meeting[] $pastMeetings
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Meeting[] $incomingMeetings
  */
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -130,6 +133,29 @@ class User extends Authenticatable implements MustVerifyEmail
             })
             ->orderBy('starts_at')
             ->withPivot('state');
+    }
+
+    /**
+     * Returns places
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function pastMeetings()
+    {
+        return $this->belongsToMany('App\Meeting', 'invitations')
+            ->wherePivot('state', 'going')
+            ->where('is_canceled', 0)
+            ->where('ends_at', '<', Carbon::now())
+            ->orderBy('ends_at')
+            ->with('place');
+    }
+
+    public function incomingMeetings()
+    {
+        return $this->belongsToMany('App\Meeting', 'invitations')
+            ->where('is_canceled', 0)
+            ->where('ends_at', '>', Carbon::now())
+            ->orWhereNull('ends_at');
     }
 
     /**

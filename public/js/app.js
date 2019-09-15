@@ -13898,6 +13898,7 @@ __webpack_require__(36);
 __webpack_require__(40);
 __webpack_require__(41);
 __webpack_require__(42);
+__webpack_require__(51);
 
 $('.modal').on('shown.bs.modal', function () {
     $(this).find('[autofocus]').focus();
@@ -38418,6 +38419,24 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;(function(root
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 45 */,
+/* 46 */,
+/* 47 */,
+/* 48 */,
+/* 49 */,
+/* 50 */,
+/* 51 */
+/***/ (function(module, exports) {
+
+$('[data-target="#add-review"]').click(function () {
+    var $modal = $('#add-review');
+    var $place = $(this).closest('.row');
+    $modal.find('#name').text($place.find('.name').text());
+    $modal.find('#address').text($place.find('.address').text());
+    $modal.find('#id').val($place.find('.id').text());
+});
 
 /***/ })
 /******/ ]);

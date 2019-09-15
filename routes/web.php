@@ -90,5 +90,10 @@ Route::get('notification/{id}', 'NotificationsController@show')->name('notificat
 Route::get('notifications', 'NotificationsController@index')->name('notifications.list');
 
 // Push Subscriptions Actions
+
 Route::post('subscriptions', 'PushSubscriptionController@update');
 Route::post('subscriptions/delete', 'PushSubscriptionController@destroy');
+
+//Places Actions
+
+Route::get('places', 'PlacesController@show');

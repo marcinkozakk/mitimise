@@ -10,6 +10,7 @@ require('./userPhoto');
 require('./showCircle');
 require('./showMeeting');
 require('./map');
+require('./reviews');
 
 $('.modal').on('shown.bs.modal', function() {
     $(this).find('[autofocus]').focus();

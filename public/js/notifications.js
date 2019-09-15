@@ -74,9 +74,8 @@ module.exports = __webpack_require__(46);
 /***/ }),
 
 /***/ 46:
-/***/ (function(module, __webpack_exports__) {
+/***/ (function(module, exports) {
 
-"use strict";
 registerServiceWorker();
 
 function registerServiceWorker() {

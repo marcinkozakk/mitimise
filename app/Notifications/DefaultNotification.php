@@ -62,6 +62,11 @@ class DefaultNotification extends Notification
         ];
     }
 
+    /**
+     * @param $notifiable
+     * @param $notification
+     * @return WebPushMessage
+     */
     public function toWebPush($notifiable, $notification)
     {
         return (new WebPushMessage)

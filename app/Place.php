@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * App\Place
@@ -27,8 +28,40 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Place whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Place whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property-read mixed $is_reviewed
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Review[] $reviews
+ * @property-read mixed $user_review
  */
 class Place extends Model
 {
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'name', 'address', 'lat', 'lng', 'is_private'
+    ];
+
+
+    public function reviews()
+    {
+        return $this->hasMany('App\Review');
+    }
+
+    public function getIsReviewedAttribute()
+    {
+        return $this->reviews()
+            ->where('user_id', Auth::id())
+            ->where('place_id', $this->id)
+            ->exists();
+    }
+
+    public function getUserReviewAttribute()
+    {
+        return $this->reviews()
+            ->where('user_id', Auth::id())
+            ->first();
+    }
 
 }
