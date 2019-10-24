@@ -102,7 +102,7 @@
                             <label for="new-date">{{ __('Propose date') }}</label>
                             <form method="post" action="{{ $formRoute }}">
                                 <div class="input-group">
-                                    <input class="form-control" type="date" name="date" id="new-date" value="{{ Date::tomorrow()->toDateString() }}">
+                                    <input class="form-control" type="date" name="date" id="new-date" value="{{ Date::tomorrow()->toDateString() }}" required>
                                     <div class="input-group-append">
                                         <button class="btn btn-primary" type="submit" >{{ __('Add') }}</button>
                                     </div>

@@ -11,10 +11,10 @@
     @can('comment', $meeting)
         <form action="{{ route('comments.create', ['meeting_id' => $meeting->id]) }}" method="post" class="row {{ $class }}">
             @csrf
-            <div class="col-1">
+            <div class="col-2 col-md-1">
                 <img class="avatar-border" src="{{ Auth::user()->photo }}">
             </div>
-            <div class="col-5">
+            <div class="col-6 col-md-5">
                 <textarea name="comment_content" rows="3" class="form-control" placeholder="{{ __('write comment...') }}"></textarea>
                 <button class="btn btn-{{ $class }} mt-1" type="submit">
                     {{ __('Submit') }}
@@ -24,10 +24,10 @@
     @endcan
     @foreach($meeting->comments as $comment)
         <div class="row mt-2 {{ $groupedGuests['going']->contains('id',$comment->user->id ) ? 'going' : 'undecided'}}">
-            <div class="col-1">
+            <div class="col-2 col-md-1">
                 <img data-toggle="tooltip" title="{{ $comment->user->name }}" class="avatar-border" src="{{ $comment->user->photo }}">
             </div>
-            <div class="col-5 align-self-center">
+            <div class="col-6 col-md-5 align-self-center">
                 <div class="comment-content rounded p-2 border-dark">
                     {!! nl2br(e($comment->content)) !!}
                 </div>

@@ -9,7 +9,7 @@
                         <img src="{{ $user->photo }}">
                     </div>
                     <div class="col-sm-8 d-flex align-items-center">
-                        <h2 class="display-3">{{ $user->name }}</h2>
+                        <h2 class="display-3 text-center">{{ $user->name }}</h2>
                     </div>
                 </div>
             </div>

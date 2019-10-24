@@ -8,7 +8,7 @@
             </h4>
         </div>
     @endcan
-    <div class="col-4 card p-0">
+    <div class="col-lg-4 card p-0">
         <div class="card-header">{{ __('Going') }}</div>
         <div class="card-body row flex-grow-0">
             @foreach($groupedGuests['going'] as $guest)
@@ -18,7 +18,7 @@
             @endforeach
         </div>
     </div>
-    <div class="col-4 text-center d-flex justify-content-center align-items-center flex-wrap align-content-center">
+    <div class="col-lg-4 my-2 my-lg-0 text-center d-flex justify-content-center align-items-center flex-wrap align-content-center">
                     <span class="count green display-3">
                         {{ $groupedGuests['going']->count() }}
                     </span>
@@ -30,7 +30,7 @@
                         {{ __('attending') }}
                     </span>
         @can('setState', $meeting)
-            <div class="row w-100">
+            <div class="row w-100 my-1">
                 <div class="col-md-6">
                     @if($meeting->guests->where('id', Auth::id())->first()->pivot->state == 'undecided')
                         <a href="{{ route('invitations.setState', ['id' => $meeting->id, 'state' => 'going']) }}" class="btn btn-block btn-going">
@@ -50,7 +50,7 @@
             </div>
         @endcan
     </div>
-    <div class="col-4 card p-0">
+    <div class="col-lg-4 card p-0">
         <div class="card-header">{{ __('Undecided') }}</div>
         <div class="card-body row flex-grow-0">
             @isset($groupedGuests['undecided'])

@@ -82,7 +82,7 @@ return [
     'min'                  => [
         'numeric' => ':attribute musi być nie mniejszy od :min.',
         'file'    => ':attribute musi mieć przynajmniej :min kilobajtów.',
-        'string'  => ':attribute usi mieć przynajmniej :min znaków.',
+        'string'  => ':attribute musi mieć przynajmniej :min znaków.',
         'array'   => ':attribute musi mieć przynajmniej :min elementów.',
     ],
     'not_in'               => 'Zaznaczony :attribute jest nieprawidłowy.',
