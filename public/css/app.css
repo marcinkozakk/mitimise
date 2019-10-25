@@ -10511,6 +10511,7 @@ a.text-dark:focus {
   width: 80vmin;
   height: 80vmin;
   position: relative;
+  top: calc((100vh - 80vmin) / 2 - 54px);
 }
 
 #circle-container a {

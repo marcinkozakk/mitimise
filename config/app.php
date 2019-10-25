@@ -216,4 +216,6 @@ return [
         'en' => 'English'
     ],
 
+    'GoogleMapsKey' => env('GOOGLE_MAPS_KEY')
+
 ];

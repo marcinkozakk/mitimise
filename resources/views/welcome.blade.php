@@ -18,6 +18,7 @@
                 font-family: 'Nunito', sans-serif;
                 font-weight: 200;
                 height: 100vh;
+                width: 100vw;
                 margin: 0;
             }
 
@@ -49,14 +50,20 @@
                 font-size: 84px;
             }
 
+            .links {
+                display: flex;
+                align-items: center;
+            }
+
             .links > a {
                 color: #636b6f;
-                padding: 0 25px;
+                padding: 0 20px;
                 font-size: 12px;
                 font-weight: 600;
                 letter-spacing: .1rem;
                 text-decoration: none;
                 text-transform: uppercase;
+                text-align: center;
             }
 
             .m-b-md {
@@ -87,7 +94,7 @@
                     Mitimise
                 </div>
 
-                <div class="links">
+                <div class="center links">
                     <a href="{{ route('home') }}">{{ __('Find your friends') }}</a>
                     <a href="{{ route('home') }}">{{ __('Create circles of friends') }}</a>
                     <a href="{{ route('home') }}">{{ __('Plan meetings') }}</a>
