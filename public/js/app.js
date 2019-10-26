@@ -35989,17 +35989,19 @@ if ($form.length > 0) {
         $('input#photo')[0].files = e.originalEvent.dataTransfer.files;
     });
 
+    var croppieSize = $(window).width() < 570 ? $(window).width() - 70 : 500;
+
     var resize = $('#crop').croppie({
         enableExif: true,
         enableOrientation: true,
         viewport: {
-            width: 500,
-            height: 500,
+            width: croppieSize,
+            height: croppieSize,
             type: 'circle'
         },
         boundary: {
-            width: 500,
-            height: 500
+            width: croppieSize,
+            height: croppieSize
         }
     });
 
@@ -36027,7 +36029,10 @@ if ($form.length > 0) {
     $('#upload').on('click', function () {
         resize.croppie('result', {
             type: 'blob',
-            size: 'viewport'
+            size: {
+                width: 500,
+                height: 500
+            }
         }).then(function (img) {
             var fd = new FormData();
             fd.append('photo', img);
