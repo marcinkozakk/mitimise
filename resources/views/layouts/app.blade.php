@@ -125,7 +125,7 @@
         var lang = {
             search: '{{ __('search...') }}',
         }
-        var GoogleMapsKey = '{{ env('app.GoogleMapsKey') }}'
+        var GoogleMapsKey = '{{ config('app.GoogleMapsKey') }}'
     </script>
 </body>
 </html>

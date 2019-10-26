@@ -248,8 +248,8 @@ class FacebookController extends Controller
         }
 
         return new Facebook([
-            'app_id' => env('FACEBOOK_APP_KEY'),
-            'app_secret' => env('FACEBOOK_APP_SECRET'),
+            'app_id' => config('app.FacebookAppKey'),
+            'app_secret' => config('app.FacebookAppSecret'),
             'default_graph_version' => 'v3.3',
         ]);
     }

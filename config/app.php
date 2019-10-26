@@ -216,6 +216,9 @@ return [
         'en' => 'English'
     ],
 
-    'GoogleMapsKey' => env('GOOGLE_MAPS_KEY')
+    'GoogleMapsKey' => env('GOOGLE_MAPS_KEY'),
+
+    'FacebookAppKey' => env('FACEBOOK_APP_KEY'),
+    'FacebookAppSecret' => env('FACEBOOK_APP_SECRET')
 
 ];
