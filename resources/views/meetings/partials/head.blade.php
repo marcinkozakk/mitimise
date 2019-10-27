@@ -20,7 +20,7 @@
     <p class="lead">{!! nl2br(e($meeting->description)) !!}</p>
     <hr class="my-4">
     <div class="row">
-        <dl class="col-6">
+        <dl class="col-sm-6">
             <dt><strong>{{ __('Organizer') }}</strong></dt>
             <dd>
                 <a href="{{ route('users.show', ['id' => $meeting->organizer_id]) }}">{{ $meeting->organizer->name }}</a>
@@ -43,7 +43,7 @@
             </dd>
         </dl>
         @if($meeting->place)
-            <dl class="col-6">
+            <dl class="col-sm-6">
                 <dt><strong>{{ __('Place') }}</strong></dt>
                 <dd>
                     <button class="btn btn-link text-left p-0" data-toggle="modal" data-target="#map-modal">

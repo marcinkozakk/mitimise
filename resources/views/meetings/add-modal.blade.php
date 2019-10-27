@@ -81,7 +81,7 @@
                                     {{ __('Don\'t set now') }}
                                 </label>
                                 <div class="form-group dates-group p-1 row">
-                                    <div class="col-6">
+                                    <div class="col-sm-6">
                                         <label class="mb-0" for="starts_at">{{ __('Starts at') }}</label>
                                         <input class="form-control{{ $errors->has('starts_at') ? ' is-invalid' : '' }}" type="datetime-local" name="starts_at" id="starts_at" value="{{ date('Y-m-d\TH:i', strtotime('tomorrow 18:00')) }}">
                                         @if ($errors->has('starts_at'))
@@ -91,7 +91,7 @@
                                         @endif
                                     </div>
 
-                                    <div class="col-6">
+                                    <div class="col-sm-6">
                                         <label class="mb-0" for="ends_at">{{ __('Ends at') }}</label>
                                         <input class="form-control{{ $errors->has('ends_at') ? ' is-invalid' : '' }}" type="datetime-local" name="ends_at" id="ends_at" value="{{ date('Y-m-d\TH:i', strtotime('tomorrow 23:00')) }}">
                                         @if ($errors->has('ends_at'))
