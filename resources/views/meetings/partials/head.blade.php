@@ -1,5 +1,5 @@
 <div class="jumbotron py-3">
-    <h1 class="display-2">
+    <h1 class="display-4">
         {{ $meeting->name }}
     </h1>
     <button class="btn btn-sm btn-primary">
