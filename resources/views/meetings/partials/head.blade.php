@@ -28,7 +28,8 @@
             <dt><strong>{{ __('Starts at') }}</strong></dt>
             <dd>
                 @if($meeting->starts_at)
-                    {{ Date::parse($meeting->starts_at)->format('l H:i, j F Y') }}
+                    {{ Date::parse($meeting->starts_at)->format('l H:i, ') }}
+                    {{ Date::parse($meeting->starts_at)->locale(app()->getLocale())->isoFormat('D MMMM Y') }}
                 @else
                     {{ __('Unset') }}
                 @endif
@@ -36,7 +37,8 @@
             <dt><strong>{{ __('Ends at') }}</strong></dt>
             <dd>
                 @if($meeting->ends_at)
-                    {{ Date::parse($meeting->ends_at)->format('l H:i, j F Y') }}
+                    {{ Date::parse($meeting->ends_at)->format('l H:i, ') }}
+                    {{ Date::parse($meeting->ends_at)->locale(app()->getLocale())->isoFormat('D MMMM Y') }}
                 @else
                     {{ __('Unset') }}
                 @endif
