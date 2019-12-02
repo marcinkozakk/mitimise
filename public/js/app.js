@@ -38069,6 +38069,7 @@ $('a[data-target="#delete-comment"]').on('click', function (e) {
 });
 $('a[data-target="#delete-day"]').on('click', function (e) {
     $('input[name="date"]').val($(e.currentTarget).data('date'));
+    $('#date-confirm').text(new Date($(e.currentTarget).data('date')).toLocaleDateString());
 });
 $('a[data-target="#setDate-meeting"]').on('click', function (e) {
     var date = $(e.currentTarget).data('date');

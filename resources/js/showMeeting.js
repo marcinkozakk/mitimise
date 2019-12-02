@@ -52,6 +52,7 @@ $('a[data-target="#delete-comment"]').on('click', (e) => {
 });
 $('a[data-target="#delete-day"]').on('click', (e) => {
     $('input[name="date"]').val($(e.currentTarget).data('date'));
+    $('#date-confirm').text(new Date($(e.currentTarget).data('date')).toLocaleDateString());
 });
 $('a[data-target="#setDate-meeting"]').on('click', (e) => {
     var date = $(e.currentTarget).data('date');
