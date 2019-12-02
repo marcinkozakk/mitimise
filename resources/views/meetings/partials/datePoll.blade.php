@@ -44,7 +44,7 @@
                         <div class="col-2 pt-2 align-self-center">
                             <h5>
                                 {{ Date::parse($date->date)->format('D, ') }}
-                                {{ Date::parse($meeting->ends_at)->locale(app()->getLocale())->isoFormat('D MMMM') }}
+                                {{ Date::parse($meeting->date)->locale(app()->getLocale())->isoFormat('D MMMM') }}
                             </h5>
                         </div>
                         <div class="col-2 text-center">
