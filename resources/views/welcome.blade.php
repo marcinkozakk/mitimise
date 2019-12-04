@@ -47,18 +47,27 @@
             }
 
             .title {
-                font-size: 84px;
+                font-size: 88px;
+                font-weight: 600;
+                color: #007bff;
             }
 
             .links {
                 display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
                 align-items: center;
             }
 
+            .content .links > a {
+                padding: 10px 20px;
+                font-size: 18px;
+            }
+
             .links > a {
-                color: #636b6f;
+                color: #007bff;
                 padding: 0 20px;
-                font-size: 12px;
+                font-size: 14px;
                 font-weight: 600;
                 letter-spacing: .1rem;
                 text-decoration: none;
@@ -68,6 +77,13 @@
 
             .m-b-md {
                 margin-bottom: 30px;
+            }
+
+            .author {
+                position: absolute;
+                right: 10px;
+                bottom: 10px;
+                color: #007bff;
             }
         </style>
     </head>
@@ -94,12 +110,15 @@
                     Mitimise
                 </div>
 
-                <div class="center links">
+                <div class="center links ">
                     <a href="{{ route('home') }}">{{ __('Find your friends') }}</a>
                     <a href="{{ route('home') }}">{{ __('Create circles of friends') }}</a>
                     <a href="{{ route('home') }}">{{ __('Plan meetings') }}</a>
                 </div>
             </div>
         </div>
+        <span class="author">
+            {{ __('Author') }}:&nbsp;Marcin Kozak
+        </span>
     </body>
 </html>
